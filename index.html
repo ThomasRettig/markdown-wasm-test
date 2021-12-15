@@ -1,0 +1,178 @@
+<html lang="en" data-disablefont="">
+   <head>
+      <meta charset="utf-8">
+      <title>markdown-wasm demo</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://rsms.me/raster/raster.css?v=8">
+      <script type="text/javascript" src="https://unpkg.com/markdown-wasm@1.2.0/dist/markdown.js"></script>
+      <link rel="stylesheet" href="https://rsms.me/markdown-wasm/highlight.css">
+      <script type="text/javascript" async="" src="https://rsms.me/markdown-wasm/highlight.js"></script>
+      <script type="text/javascript" src="https://unpkg.com/clipboard@2.0.8/dist/clipboard.min.js"></script>
+      <style type="text/css">
+        :root {
+         --fontSize: 14px;
+        }
+
+        c.label {
+         font-weight: 500;
+         letter-spacing: 0;
+         color: #999;
+        }
+
+        c.input,
+        c.output {
+         max-width: 50vw;
+        }
+
+        c.textarea {
+         display: flex;
+         justify-content: stretch;
+        }
+
+        c.textarea textarea {
+         flex: 1 1 auto;
+         min-height: 50vh;
+         border: 2px solid black;
+         border-radius: 3px;
+         padding: 1rem;
+         font-size: 14px;
+        }
+
+        c.textarea textarea:focus {
+         outline: none;
+         border-color: var(--blue);
+        }
+
+        blockquote {
+         padding-left: var(--lineHeight);
+         border-left: 2px solid #ccc;
+        }
+
+        h1>a.anchor,
+        h2>a.anchor,
+        h3>a.anchor,
+        h4>a.anchor,
+        h5>a.anchor,
+        h6>a.anchor {
+         display: inline-block;
+         float: left;
+         height: 1.2em;
+         width: 1em;
+         margin-left: -1em;
+         position: relative;
+         outline: none;
+        }
+
+        .label {
+          display: flex;
+          justify-content: space-between;
+        }
+
+        .label > span {
+          cursor: pointer;
+        }
+
+        /*.anchor:target { background: yellow; }*/
+
+        h1>a.anchor:before,
+        h2>a.anchor:before,
+        h3>a.anchor:before,
+        h4>a.anchor:before,
+        h5>a.anchor:before,
+        h6>a.anchor:before {
+         visibility: hidden;
+         position: absolute;
+         opacity: 0.2;
+         right: 10;
+         top: 0;
+         width: 1em;
+         font-weight: normal;
+         font-size: 70%;
+         line-height: inherit;
+         content: "🔗";
+         text-align: center;
+        }
+
+        h1>a.anchor:hover:before,
+        h2>a.anchor:hover:before,
+        h3>a.anchor:hover:before,
+        h4>a.anchor:hover:before,
+        h5>a.anchor:hover:before,
+        h6>a.anchor:hover:before {
+         visibility: visible;
+         opacity: 0.8;
+        }
+
+        h1>a.anchor:focus:before,
+        h2>a.anchor:focus:before,
+        h3>a.anchor:focus:before,
+        h4>a.anchor:focus:before,
+        h5>a.anchor:focus:before,
+        h6>a.anchor:focus:before,
+        h1:hover .anchor:before,
+        h2:hover .anchor:before,
+        h3:hover .anchor:before,
+        h4:hover .anchor:before,
+        h5:hover .anchor:before,
+        h6:hover .anchor:before {
+         visibility: visible;
+        }
+      </style>
+   </head>
+   <body>
+      <grid columns="2" class="_debug">
+         <c>
+            <h1>Markdown Wasm Demo</h1>
+         </c>
+         <c>
+         </c>
+         <c class="label">Type some Markdown</c>
+         <c class="label">HTML output<span class="btn" data-clipboard-target="#html-output" title="Copy text to clipboard">Copy</span></c>
+         <c class="input textarea">
+            <textarea class="code" id="markdown-input"># Hello, world!&#013;This is some text that you can edit in Markdown.</textarea>
+         </c>
+         <c class="output" id="html-output">
+         </c>
+      </grid>
+      <script type="text/javascript">
+         // await the loading of the web assembly module
+         window["markdown"].ready.then(markdown => {
+         
+         const inputEl = document.getElementById("markdown-input")
+         const outputEl = document.getElementById("html-output")
+         let hljsTimer
+         
+         function update() {
+           let source = inputEl.value
+           let html = markdown.parse(source, {
+             parseFlags: markdown.ParseFlags.DEFAULT | markdown.ParseFlags.NO_HTML,
+           })
+           outputEl.innerHTML = html
+           updateCodeHighlight()
+         }
+         
+         function updateCodeHighlight() {
+           clearTimeout(hljsTimer)
+           if (typeof hljs == "undefined") {
+             hljsTimer = setTimeout(updateCodeSyntaxHighlighting, 500)
+             return
+           }
+           document.querySelectorAll('pre code[class^="language-"]').forEach(block => {
+             hljs.highlightBlock(block)
+           })
+         }
+         
+         inputEl.addEventListener("input", update)
+         update()
+         
+         // load the markdown module to make it playable in the browser console
+         console.log("markdown module API:", markdown)
+         
+         })
+      </script>
+      <script>
+        new ClipboardJS('.btn');
+      </script>
+   </body>
+</html>
