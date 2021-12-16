@@ -4,7 +4,6 @@
       <title>Markdown WASM Demo</title>
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="icon" href="https://twemoji.maxcdn.com/2/svg/1f441.svg">
       <link rel="stylesheet" href="https://rsms.me/raster/raster.css?v=8">
       <script type="text/javascript" src="https://unpkg.com/markdown-wasm@1.2.0/dist/markdown.js"></script>
       <link rel="stylesheet" href="https://rsms.me/markdown-wasm/highlight.css">
@@ -121,6 +120,7 @@
          visibility: visible;
         }
       </style>
+      <link rel="icon" href="favicon.svg">
    </head>
    <body>
       <grid columns="2" class="_debug">
@@ -186,7 +186,7 @@
             e.clearSelection();
         });
 
-        var text = "# Hello, world!\nThis is some text in Markdown format.\n\n```js\n// you can write some code here.\n```" 
+        var text = "# Hello, world!\nThis is some text in **Markdown**.\n```js\n// you can edit this code too, if you want.\n```" 
         document.getElementById("markdown-input").innerHTML = text;
       </script>
       <script>
