@@ -180,7 +180,8 @@ View the [getting started](https://www.markdownguide.org/getting-started/) guide
       <c class="output" id="html-output">
       </c>
       </grid>
-      <script type="text/javascript">
+      <script>
+        // instantiate Markdown parser
          window["markdown"].ready.then(markdown => {
          
          const inputEl = document.getElementById("markdown-input")
@@ -196,6 +197,7 @@ View the [getting started](https://www.markdownguide.org/getting-started/) guide
            updateCodeHighlight()
          }
          
+         // syntax highlighting
          function updateCodeHighlight() {
            clearTimeout(hljsTimer)
            if (typeof hljs == "undefined") {
@@ -212,6 +214,7 @@ View the [getting started](https://www.markdownguide.org/getting-started/) guide
          })
       </script>
       <script>
+        // copy markdown to clipboard
         var clipboard = new ClipboardJS('button')
 
         clipboard.on('success', function(e) {
@@ -221,8 +224,8 @@ View the [getting started](https://www.markdownguide.org/getting-started/) guide
             }, 650)
             e.clearSelection()
         });
-      </script>
-      <script>
+
+        // install service worker
         if (navigator && navigator.serviceWorker) {
           navigator.serviceWorker.register('sw.js')
         }
