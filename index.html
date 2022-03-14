@@ -173,24 +173,8 @@
           <c class="label">Type some Markdown<button class="btn" id="clipboard" data-clipboard-target="#markdown-input" title="Copy text to clipboard">Copy Markdown</button></c>
           <c class="label"></c>
           <c class="input textarea">
-            <textarea class="code" id="markdown-input"># Hello, world!
-This is some dummy text which you can edit! **Very cool stuff**.
-```js
-// some Javascript code
-var clipboard = new ClipboardJS('.btn');
-
-clipboard.on('success', function(e) {
-    document.getElementById("clipboard").innerHTML = "Copied!";
-    setTimeout(function (){
-      document.getElementById("clipboard").innerHTML = "Copy Markdown";
-    }, 650);
-    e.clearSelection();
-});
-
-const foo = () => {
-  console.warn("Important stuff!") + err;
-}
-```</textarea>
+            <textarea class="code" id="markdown-input" placeholder="Type something here…"># Hello world!
+View the [getting started](https://www.markdownguide.org/getting-started/) guide if you are unfamiliar with Markdown.</textarea>
         </c>
       </div>
       <c class="output" id="html-output">
