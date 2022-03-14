@@ -3,27 +3,51 @@
    <head>
       <meta charset="utf-8">
       <title>Markdown Editor</title>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="https://rsms.me/raster/raster.css?v=8">
-      <script type="text/javascript" src="https://unpkg.com/markdown-wasm@1.2.0/dist/markdown.js"></script>
-      <link rel="stylesheet" href="https://rsms.me/markdown-wasm/highlight.css">
-      <script type="text/javascript" async="" src="https://rsms.me/markdown-wasm/highlight.js"></script>
-      <script type="text/javascript" src="https://unpkg.com/clipboard@2.0.8/dist/clipboard.min.js"></script>
-      <style type="text/css">
+      <link rel="icon" href="favicon.svg">
+      <script src="markdown.js"></script>
+      <link rel="stylesheet" href="highlight.css">
+      <script src="highlight.js"></script>
+      <script src="https://unpkg.com/clipboard@2.0.8/dist/clipboard.min.js" integrity="sha384-CUdYwYFu8WmBI8h257c5rCd1GQX0KL+zSYV6kyRNY2thW7QqQymKGfTCI1WHwzvy" crossorigin="anonymous"></script>
+      <link rel="stylesheet" href="https://rsms.me/raster/raster.css" integrity="sha384-7uqkm+H0k4c3GvbKEBzaQEnHlUJM0JUU4kgKDJ7hBxStAN+jskrfIewxwTAe6V2J" crossorigin="anonymous">
+      <style>
+        :root {
+         --fontSize: 15px;
+        }
+
         *,
         ::before,
         ::after {
           box-sizing: border-box;
         }
 
-        :root {
-         --fontSize: 15px;
+        ::-webkit-scrollbar {
+            background: #fff;
+            border-radius: 10px
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #ddd;
+            border: 4px solid transparent;
+            border-radius: 100px;
+            background-clip: content-box
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: grey;
+            border: 4px solid transparent;
+            border-radius: 150px;
+            background-clip: content-box
         }
 
         ::selection {
           background-color: var(--blue);
           color: white;
+        }
+
+        html {
+          overflow: scroll;
+          overflow-x: hidden;
         }
 
         button {
@@ -52,6 +76,7 @@
          width: 100%;
          height: auto;
          resize: vertical;
+         padding-right: 5px;
         }
 
         c.textarea textarea:focus {
@@ -101,13 +126,12 @@
          visibility: hidden;
          position: absolute;
          opacity: 0.2;
-         right: 10;
          top: 0;
          width: 1em;
          font-weight: normal;
          font-size: 70%;
          line-height: inherit;
-         content: "🔗";
+         content: "\1F517";
          text-align: center;
         }
 
@@ -136,28 +160,43 @@
          visibility: visible;
         }
       </style>
-      <link rel="icon" href="favicon.svg">
+      <link rel="manifest" href="manifest.webmanifest">
    </head>
    <body>
       <grid columns="2" class="_debug">
-         <c>
-            <h1>Markdown Editor</h1>
-         </c>
-         <c>
-         </c>
-         <div id="wrapper">
-            <c class="label">Type some Markdown<button class="btn" id="clipboard" data-clipboard-target="#markdown-input" title="Copy text to clipboard">Copy Markdown</button></c>
-            <c class="label"></c>
-            <c class="input textarea">
-               <textarea class="code" id="markdown-input"># Hello, world!
-This is some dummy text which you can edit! **Very cool stuff**.</textarea>
-            </c>
-          </div>
-         <c class="output" id="html-output">
-         </c>
+        <c>
+          <h1>Markdown Editor</h1>
+        </c>
+        <c>
+        </c>
+        <div id="wrapper">
+          <c class="label">Type some Markdown<button class="btn" id="clipboard" data-clipboard-target="#markdown-input" title="Copy text to clipboard">Copy Markdown</button></c>
+          <c class="label"></c>
+          <c class="input textarea">
+            <textarea class="code" id="markdown-input"># Hello, world!
+This is some dummy text which you can edit! **Very cool stuff**.
+```js
+// some Javascript code
+var clipboard = new ClipboardJS('.btn');
+
+clipboard.on('success', function(e) {
+    document.getElementById("clipboard").innerHTML = "Copied!";
+    setTimeout(function (){
+      document.getElementById("clipboard").innerHTML = "Copy Markdown";
+    }, 650);
+    e.clearSelection();
+});
+
+const foo = () => {
+  console.warn("Important stuff!") + err;
+}
+```</textarea>
+        </c>
+      </div>
+      <c class="output" id="html-output">
+      </c>
       </grid>
       <script type="text/javascript">
-         // await the loading of the web assembly module
          window["markdown"].ready.then(markdown => {
          
          const inputEl = document.getElementById("markdown-input")
@@ -188,17 +227,21 @@ This is some dummy text which you can edit! **Very cool stuff**.</textarea>
          update()
          })
       </script>
-      <script type="text/javascript">
-        var clipboard = new ClipboardJS('.btn');
+      <script>
+        var clipboard = new ClipboardJS('button')
 
         clipboard.on('success', function(e) {
-            document.getElementById("clipboard").innerHTML = "Copied!";
+            document.getElementById("clipboard").innerHTML = "Copied!"
             setTimeout(function (){
-              document.getElementById("clipboard").innerHTML = "Copy Markdown";
-            }, 650);
-            e.clearSelection();
+              document.getElementById("clipboard").innerHTML = "Copy Markdown"
+            }, 650)
+            e.clearSelection()
         });
       </script>
-      <script src="https://unpkg.com/smartquotes@2.3.2/dist/smartquotes.js"></script>
+      <script>
+        if (navigator && navigator.serviceWorker) {
+          navigator.serviceWorker.register('sw.js')
+        }
+      </script>
    </body>
 </html>
