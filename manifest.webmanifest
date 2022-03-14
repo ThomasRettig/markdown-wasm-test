@@ -7,7 +7,7 @@
     "start_url": "/",
     "name": "Markdown Wasm",
     "description": "Write Markdown in your browser.",
-    "short_name": "AvgColour",
+    "short_name": "Markdown",
     "icons": [
         {
             "src": "/icon-192x192.png",
