@@ -12,7 +12,7 @@
       <link rel="stylesheet" href="https://rsms.me/raster/raster.css" integrity="sha384-7uqkm+H0k4c3GvbKEBzaQEnHlUJM0JUU4kgKDJ7hBxStAN+jskrfIewxwTAe6V2J" crossorigin="anonymous">
       <style>
         :root {
-         --fontSize: 15px;
+          --fontSize: 15px;
         }
 
         *,
@@ -45,6 +45,25 @@
           color: white;
         }
 
+        [data-title] {
+          position: relative;
+        }
+
+        [data-title]:hover::before {
+          content: attr(data-title);
+          position: absolute;
+          bottom: -30px;
+          display: inline-block;
+          padding: 3px 6px;
+          border-radius: 5px;
+          background: #444;
+          color: #fff;
+          font-size: 12px;
+          font-weight: 500;
+          font-family: inherit;
+          white-space: nowrap;
+        }
+
         html {
           overflow: scroll;
           overflow-x: hidden;
@@ -52,6 +71,25 @@
 
         button {
           all: unset;
+        }
+
+        svg {
+          vertical-align: bottom;
+        }
+
+        .select-none {
+          user-select: none;
+        }
+
+        .sr-only {
+          clip: rect(1px, 1px, 1px, 1px);
+          clip-path: inset(50%);
+          height: 1px;
+          width: 1px;
+          margin: -1px;
+          overflow: hidden;
+          padding: 0;
+          position: absolute;
         }
 
         c.label {
@@ -75,7 +113,7 @@
          font-size: 14px;
          width: 100%;
          height: auto;
-         resize: vertical;
+         resize: none;
          padding-right: 5px;
         }
 
@@ -87,21 +125,6 @@
         blockquote {
          padding-left: var(--lineHeight);
          border-left: 2px solid #ccc;
-        }
-
-        h1>a.anchor,
-        h2>a.anchor,
-        h3>a.anchor,
-        h4>a.anchor,
-        h5>a.anchor,
-        h6>a.anchor {
-         display: inline-block;
-         float: left;
-         height: 1.2em;
-         width: 1em;
-         margin-left: -1em;
-         position: relative;
-         outline: none;
         }
 
         .label {
@@ -117,47 +140,44 @@
           outline: 2px solid var(--blue);
         }
 
-        h1>a.anchor:before,
-        h2>a.anchor:before,
-        h3>a.anchor:before,
-        h4>a.anchor:before,
-        h5>a.anchor:before,
-        h6>a.anchor:before {
-         visibility: hidden;
-         position: absolute;
-         opacity: 0.5;
-         top: 0;
-         width: 1em;
-         font-weight: normal;
-         font-size: 70%;
-         line-height: inherit;
-         content: "\1F517";
-         text-align: center;
+        @media screen and (min-width: 900px) {
+          .gap {
+            display: flex;
+            gap: calc(4px + 0.1vw);
+          }
         }
 
-        h1>a.anchor:hover:before,
-        h2>a.anchor:hover:before,
-        h3>a.anchor:hover:before,
-        h4>a.anchor:hover:before,
-        h5>a.anchor:hover:before,
-        h6>a.anchor:hover:before {
-         visibility: visible;
-         opacity: 0.8;
+        :where(h1, h2, h3, h4, h5, h6) > a.anchor {
+          display: inline-block;
+          float: left;
+          height: 1.2em;
+          width: 1em;
+          margin-left: -1em;
+          position: relative;
+          outline: none;
         }
 
-        h1>a.anchor:focus:before,
-        h2>a.anchor:focus:before,
-        h3>a.anchor:focus:before,
-        h4>a.anchor:focus:before,
-        h5>a.anchor:focus:before,
-        h6>a.anchor:focus:before,
-        h1:hover .anchor:before,
-        h2:hover .anchor:before,
-        h3:hover .anchor:before,
-        h4:hover .anchor:before,
-        h5:hover .anchor:before,
-        h6:hover .anchor:before {
-         visibility: visible;
+        :where(h1, h2, h3, h4, h5, h6) > a.anchor::before {
+          visibility: hidden;
+          position: absolute;
+          opacity: 0.5;
+          top: 0;
+          width: 1em;
+          font-weight: normal;
+          font-size: 70%;
+          line-height: inherit;
+          content: "\1F517";
+          text-align: center;
+        }
+
+        :where(h1, h2, h3, h4, h5, h6) > a.anchor:hover::before {
+          visibility: visible;
+          opacity: 0.8;
+        }
+
+        :where(h1, h2, h3, h4, h5, h6) > a.anchor:focus::before,
+        :where(h1, h2, h3, h4, h5, h6):hover .anchor::before {
+          visibility: visible;
         }
       </style>
       <link rel="manifest" href="manifest.webmanifest">
@@ -165,16 +185,64 @@
    <body>
       <grid columns="2" class="_debug">
         <c>
-          <h1>Markdown Editor</h1>
+          <h1 class="sr-only">Markdown Editor</h1>
         </c>
         <c>
         </c>
         <div id="wrapper">
-          <c class="label">Type some Markdown<button class="btn" id="clipboard" data-clipboard-target="#markdown-input" title="Copy text to clipboard">Copy Markdown</button></c>
+          <c class="label">
+            <span id="input-label">Markdown</span>
+            <div class="gap select-none">
+              <button class="btn" id="save" data-title="Save Markdown file"><svg alt="Download file icon" role="img" xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="M16.59 9H15V4c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v5H7.41c-.89 0-1.34 1.08-.71 1.71l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.63-.63.19-1.71-.7-1.71zM5 19c0 .55.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1H6c-.55 0-1 .45-1 1z"/></svg></button>    
+              <button class="btn" id="clipboard" data-clipboard-target="#markdown-input" data-title="Copy text to clipboard"><svg alt="Copy to clipboard icon" role="img" xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="M15 20H5V7c0-.55-.45-1-1-1s-1 .45-1 1v13c0 1.1.9 2 2 2h10c.55 0 1-.45 1-1s-.45-1-1-1zm5-4V4c0-1.1-.9-2-2-2H9c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h9c1.1 0 2-.9 2-2zm-2 0H9V4h9v12z"/></svg></button>
+            </div>
+          </c>
           <c class="label"></c>
           <c class="input textarea">
-            <textarea class="code" id="markdown-input" placeholder="Type something here…"># Hello world!
-View the [getting started](https://www.markdownguide.org/getting-started/) guide if you are unfamiliar with Markdown.</textarea>
+            <textarea class="code" id="markdown-input" placeholder="Type something here…" aria-labelledby="input-label" required autofocus>```js
+var File = function(url, object){
+  File.list = Array.isArray(File.list)? File.list : [];
+  File.progress = File.progress || 0;
+  this.progress = 0;
+  this.object = object;
+  this.url = url;
+};
+
+File.indexOf = function(term){
+  for(var index in File.list){
+    var file = File.list[index];
+    if (file.equals(term) || file.url === term || file.object === term) {
+      return index;
+    }
+  }
+  return -1;
+};
+
+File.find = function(term){
+  var index = File.indexOf(term);
+  return ~index && File.list[index];
+};
+
+File.prototype.equals = function(file){
+  var isFileType = file instanceof File;
+  return isFileType && this.url === file.url && this.object === file.object;
+};
+
+File.prototype.save = function(update){
+  update = typeof update === 'undefined'? true : update; 
+  if(Array.isArray(File.list)){
+    var index = File.indexOf(this);
+    if(~index && update) {
+      File.list[index] = this; 
+      console.warn('File `%s` has been loaded before and updated now for: %O.', this.url, this);
+    }else File.list.push(this);
+    console.log(File.list)
+  }else{
+    File.list = [this];
+  }
+  return this;
+};
+```</textarea>
         </c>
       </div>
       <c class="output" id="html-output">
@@ -191,7 +259,7 @@ View the [getting started](https://www.markdownguide.org/getting-started/) guide
          function update() {
            let source = inputEl.value
            let html = markdown.parse(source, {
-             parseFlags: markdown.ParseFlags.DEFAULT,
+             parseFlags: markdown.ParseFlags.DEFAULT | markdown.ParseFlags.PERMISSIVE_WWW_AUTOLINKS,
            })
            outputEl.innerHTML = html
            updateCodeHighlight()
@@ -218,16 +286,57 @@ View the [getting started](https://www.markdownguide.org/getting-started/) guide
         var clipboard = new ClipboardJS('button')
 
         clipboard.on('success', function(e) {
-            document.getElementById("clipboard").innerHTML = "Copied!"
+            document.getElementById("clipboard").setAttribute("data-title", "Copied!")
             setTimeout(function (){
-              document.getElementById("clipboard").innerHTML = "Copy Markdown"
-            }, 650)
+              document.getElementById("clipboard").setAttribute("data-title", "Copy to clipboard")
+            }, 750)
             e.clearSelection()
         });
+
+        function saveTextAsFile() {
+          var textToWrite = document.getElementById('markdown-input').value;
+          var textFileAsBlob = new Blob([textToWrite], {
+            type: 'text/plain'
+          });
+          var fileNameToSaveAs = "markdown.txt";
+
+          var downloadLink = document.createElement("a");
+          downloadLink.download = fileNameToSaveAs;
+          downloadLink.innerHTML = "Download File";
+          if (window.webkitURL != null) {
+            // Chrome allows the link to be clicked
+            // without actually adding it to the DOM.
+            downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+          } else {
+            // Firefox requires the link to be added to the DOM
+            // before it can be clicked.
+            downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+            downloadLink.onclick = destroyClickedElement;
+            downloadLink.style.display = "none";
+            document.body.appendChild(downloadLink);
+          }
+
+          downloadLink.click();
+        }
+
+        document.getElementById('save').addEventListener('click', saveTextAsFile);
+
 
         // install service worker
         if (navigator && navigator.serviceWorker) {
           navigator.serviceWorker.register('sw.js')
+        }
+
+        // make textarea resize height automatically
+        const tx = document.getElementsByTagName('textarea');
+        for (let i = 0; i < tx.length; i++) {
+            tx[i].setAttribute('style', 'height:' + (tx[i].scrollHeight) + 'px;overflow-y:hidden;');
+            tx[i].addEventListener('input', OnInput, false);
+        }
+
+        function OnInput() {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
         }
       </script>
    </body>
