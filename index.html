@@ -13,6 +13,7 @@
       <link rel="stylesheet" href="https://rsms.me/inter/inter.css" integrity="sha384-W6+NiSXA/+3toA3eVYNOpnxGNKxc5xkp539DuEJohfNc727NX/cryh3nNBzh4J8B" crossorigin="anonymous">
       <style>
         :root {
+          --fontSize: 15px;
           --sansFont: "Inter";
           --monoFont: "iaw-mono";
           --lineHeight: calc(var(--fontSize)*1.5);
@@ -26,8 +27,6 @@
           --h4-size: 1.1rem;
           --columnGap: calc(var(--lineHeight)*2);
           --rowGap: var(--lineHeight);
-          --displayScale: 1;
-          --pixel: 1px;
           --foreground-color-rgb: 0, 0, 0;
           --foreground-color-a: 1;
           --foreground-color: rgba(var(--foreground-color-rgb), var(--foreground-color-a));
@@ -237,6 +236,7 @@
         }
 
         a {
+          transition: 0.2s ease;
           text-decoration: underline;
           text-decoration-color: #aaa;
           white-space: nowrap;
@@ -419,10 +419,6 @@
           margin-top: calc(var(--lineHeight)*1.5 + var(--border-width)*-1);
         }
 
-        :root {
-          --fontSize: 15px;
-        }
-
         *,
         ::before,
         ::after {
@@ -457,7 +453,7 @@
           position: relative;
         }
 
-        [data-title]:hover::before {
+        [data-title]:hover::before, [data-title]:focus-visible::before {
           content: attr(data-title);
           position: absolute;
           bottom: -30px;
@@ -478,6 +474,11 @@
 
         svg {
           vertical-align: bottom;
+          transition: 0.2s ease;
+        }
+
+        svg:hover {
+          transform: scale(1.1);
         }
 
         c.label {
@@ -563,11 +564,11 @@
         :where(h1, h2, h3, h4, h5, h6) > a.anchor::before {
           visibility: hidden;
           position: absolute;
-          opacity: 0.5;
+          opacity: 0.6;
           top: 0;
           width: 1em;
           font-weight: normal;
-          font-size: 70%;
+          font-size: 65%;
           line-height: inherit;
           content: "\1F517";
           text-align: center;
@@ -575,7 +576,7 @@
 
         :where(h1, h2, h3, h4, h5, h6) > a.anchor:hover::before {
           visibility: visible;
-          opacity: 0.8;
+          opacity: 1;
         }
 
         :where(h1, h2, h3, h4, h5, h6) > a.anchor:focus::before,
@@ -596,7 +597,7 @@
           <c class="label">
             <span id="input-label">Markdown</span>
             <div class="gap select-none">
-              <button class="btn" id="save" data-title="Save Markdown file"><svg alt="Download file icon" role="img" xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="M16.59 9H15V4c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v5H7.41c-.89 0-1.34 1.08-.71 1.71l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.63-.63.19-1.71-.7-1.71zM5 19c0 .55.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1H6c-.55 0-1 .45-1 1z"/></svg></button>    
+              <button class="btn" id="save" data-title="Download Markdown file"><svg alt="Download file icon" role="img" xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="M16.59 9H15V4c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v5H7.41c-.89 0-1.34 1.08-.71 1.71l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.63-.63.19-1.71-.7-1.71zM5 19c0 .55.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1H6c-.55 0-1 .45-1 1z"/></svg></button>    
               <button class="btn" id="clipboard" data-clipboard-target="#markdown-input" data-title="Copy text to clipboard"><svg alt="Copy to clipboard icon" role="img" xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="M15 20H5V7c0-.55-.45-1-1-1s-1 .45-1 1v13c0 1.1.9 2 2 2h10c.55 0 1-.45 1-1s-.45-1-1-1zm5-4V4c0-1.1-.9-2-2-2H9c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h9c1.1 0 2-.9 2-2zm-2 0H9V4h9v12z"/></svg></button>
             </div>
           </c>
@@ -606,8 +607,7 @@
 View the [getting started](https://www.markdownguide.org/getting-started/) guide if you are unfamiliar with Markdown.</textarea>
         </c>
       </div>
-      <c class="output" id="html-output">
-      </c>
+      <c class="output" id="html-output"></c>
       </grid>
       <script>
         // instantiate Markdown parser
