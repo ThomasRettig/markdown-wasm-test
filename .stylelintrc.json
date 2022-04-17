@@ -4,7 +4,7 @@
     "selector-type-no-unknown": [
       true,
       {
-        "custom-elements": ["default-namespace"] // allow for custom elements as Raster CSS framework is used
+        "custom-elements": ["default-namespace"]
       }
     ]
   }
