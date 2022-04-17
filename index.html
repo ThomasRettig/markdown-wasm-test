@@ -236,7 +236,7 @@
         }
 
         a {
-          transition: 0.2s ease;
+          transition: 0.1s ease;
           text-decoration: underline;
           text-decoration-color: #aaa;
           white-space: nowrap;
@@ -494,6 +494,7 @@
         }
 
         c.textarea textarea {
+          font-family: var(--monoFont);
          flex: 1 1 auto;
          min-height: 55vh;
          border: 2px solid #ccc;
@@ -604,7 +605,60 @@
           <c class="label"></c>
           <c class="input textarea">
             <textarea class="code" id="markdown-input" placeholder="Type something here…" aria-labelledby="input-label" required autofocus># Hello world!
-View the [getting started](https://www.markdownguide.org/getting-started/) guide if you are unfamiliar with Markdown.</textarea>
+View the [getting started](https://www.markdownguide.org/getting-started/) guide if you are unfamiliar with Markdown.
+
+## Syntax highlighting
+
+Syntax highlighting for popular programming languages is supported. Here are a few examples.
+
+### Javascript
+```js
+var File = function(url, object){
+  File.list = Array.isArray(File.list)? File.list : [];
+  File.progress = File.progress || 0;
+  this.progress = 0;
+  this.object = object;
+  this.url = url;
+};
+```
+### C++
+```cpp
+#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    int num1, num2, add;
+    cout&lt;&lt;&quot;Enter Two Numbers: &quot;;
+    cin&gt;&gt;num1&gt;&gt;num2;
+    add = num1+num2;
+    cout&lt;&lt;&quot;\nResult = &quot;&lt;&lt;add;
+    cout&lt;&lt;endl;
+    return 0;
+}
+```
+### Go
+
+```go
+func loadPage(title string) (*Page, error) {
+    filename := title + ".txt"
+    body, err := os.ReadFile(filename)
+    if err != nil {
+        return nil, err
+    }
+    return &Page{Title: title, Body: body}, nil
+}
+```
+
+### Python
+
+```py
+import urllib.request, json 
+with urllib.request.urlopen("http://maps.googleapis.com/maps/api/geocode/json?address=google") as url:
+    data = json.loads(url.read().decode())
+    print(data)
+```
+</textarea>
         </c>
       </div>
       <c class="output" id="html-output"></c>

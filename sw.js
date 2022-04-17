@@ -2,13 +2,19 @@ var CACHE = 'cache-v1';
 
 var urls = [
   '/',
-  'https://unpkg.com/clipboard@2.0.8/dist/clipboard.min.js',
+  'clipboard.min.js',
   'favicon.svg',
-  'https://rsms.me/raster/raster.css',
+  'manifest.webmanifest',
   'markdown.js',
   'highlight.css',
   'highlight.js',
-  'sw.js'
+  'sw.js',
+  'markdown.wasm',
+  'https://rsms.me/res/fonts/iaw.css',
+  'https://rsms.me/inter/inter.css',
+  'https://rsms.me/inter/font-files/Inter-roman.var.woff2?v=3.19',
+  'https://rsms.me/res/fonts/iaw/iaw-mono-vf.woff2',
+  'icon-192x192.png' // default PWA icon fetched by Chrome desktop
 ];
 
 self.addEventListener('install', function(event) {
