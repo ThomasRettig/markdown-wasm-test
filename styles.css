@@ -67,6 +67,11 @@
   color: white;
 }
 
+:focus-visible, :where(h1, h2, h3, h4, h5, h6) > a.anchor:focus-visible::before {
+  transition: 0s;
+  outline: 2px solid var(--blue);
+}
+
 blockquote,
 q {
   quotes: none;
@@ -347,7 +352,7 @@ ol:not([start]) > li::before {
   position: absolute;
   --space: 0.5em;
   --width: calc(var(--list-indentation) - var(--space));
-  left: calc(-1*(var(--width) + var(--space)));
+  left: calc(-1 * (var(--width) + var(--space)));
   width: var(--width);
   height: var(--line-height);
   text-align: left;
@@ -505,10 +510,6 @@ blockquote {
   position: absolute;
 }
 
-.btn:focus {
-  outline: 2px solid var(--blue);
-}
-
 @media screen and (min-width: 900px) {
   .gap {
     display: flex;
@@ -529,14 +530,13 @@ blockquote {
 :where(h1, h2, h3, h4, h5, h6) > a.anchor::before {
   visibility: hidden;
   position: absolute;
-  opacity: 0.6;
   top: 0;
-  width: 1em;
+  right: 2px;
   font-weight: normal;
-  font-size: 65%;
+  font-size: 25px;
   line-height: inherit;
   content: "\1F517";
-  text-align: center;
+  text-align: right;
 }
 
 :where(h1, h2, h3, h4, h5, h6) > a.anchor:hover::before {

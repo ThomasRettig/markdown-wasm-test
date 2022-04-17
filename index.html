@@ -16,75 +16,24 @@
   </head>
   <body>
     <grid columns="2">
-      <c>
-        <h1 class="sr-only">Markdown Editor</h1>
-      </c>
+      <header>
+        <c>
+          <h1 class="sr-only">Markdown Editor</h1>
+        </c>
+      </header>
       <c>
       </c>
       <div id="wrapper">
         <c class="label">
           <span id="input-label">Markdown</span>
           <div class="gap select-none">
-            <button class="btn" id="save" data-title="Download Markdown file"><svg alt="Download file icon" role="img" xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="M16.59 9H15V4c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v5H7.41c-.89 0-1.34 1.08-.71 1.71l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.63-.63.19-1.71-.7-1.71zM5 19c0 .55.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1H6c-.55 0-1 .45-1 1z"/></svg></button>    
-            <button class="btn" id="clipboard" data-clipboard-target="#markdown-input" data-title="Copy text to clipboard"><svg alt="Copy to clipboard icon" role="img" xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="M15 20H5V7c0-.55-.45-1-1-1s-1 .45-1 1v13c0 1.1.9 2 2 2h10c.55 0 1-.45 1-1s-.45-1-1-1zm5-4V4c0-1.1-.9-2-2-2H9c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h9c1.1 0 2-.9 2-2zm-2 0H9V4h9v12z"/></svg></button>
+            <button class="btn" id="save" data-title="Download Markdown file" aria-label="Download Markdown file"><svg aria-label="Download file icon" role="img" xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="M16.59 9H15V4c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v5H7.41c-.89 0-1.34 1.08-.71 1.71l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.63-.63.19-1.71-.7-1.71zM5 19c0 .55.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1H6c-.55 0-1 .45-1 1z"/></svg></button>    
+            <button class="btn" id="clipboard" data-clipboard-target="#markdown-input" data-title="Copy text to clipboard" aria-label="Copy text to clipboard"><svg aria-label="Copy to clipboard icon" role="img" xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="M15 20H5V7c0-.55-.45-1-1-1s-1 .45-1 1v13c0 1.1.9 2 2 2h10c.55 0 1-.45 1-1s-.45-1-1-1zm5-4V4c0-1.1-.9-2-2-2H9c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h9c1.1 0 2-.9 2-2zm-2 0H9V4h9v12z"/></svg></button>
           </div>
         </c>
         <c class="label"></c>
         <c class="input textarea">
-          <textarea class="code" id="markdown-input" placeholder="Type something here…" aria-labelledby="input-label" required autofocus># Hello world!
-  View the [getting started](https://www.markdownguide.org/getting-started/) guide if you are unfamiliar with Markdown.
-
-  ## Syntax highlighting
-
-  Syntax highlighting for popular programming languages is supported. Here are a few examples.
-
-  ### Javascript
-  ```js
-  var File = function(url, object){
-    File.list = Array.isArray(File.list)? File.list : [];
-    File.progress = File.progress || 0;
-    this.progress = 0;
-    this.object = object;
-    this.url = url;
-  };
-  ```
-  ### C++
-  ```cpp
-  #include &lt;iostream&gt;
-  using namespace std;
-
-  int main()
-  {
-    int num1, num2, add;
-    cout&lt;&lt;&quot;Enter Two Numbers: &quot;;
-    cin&gt;&gt;num1&gt;&gt;num2;
-    add = num1+num2;
-    cout&lt;&lt;&quot;\nResult = &quot;&lt;&lt;add;
-    cout&lt;&lt;endl;
-    return 0;
-  }
-  ```
-  ### Go
-
-  ```go
-  func loadPage(title string) (*Page, error) {
-    filename := title + ".txt"
-    body, err := os.ReadFile(filename)
-    if err != nil {
-        return nil, err
-    }
-    return &Page{Title: title, Body: body}, nil
-  }
-  ```
-
-  ### Python
-
-  ```py
-  import urllib.request, json 
-  with urllib.request.urlopen("http://maps.googleapis.com/maps/api/geocode/json?address=google") as url:
-    data = json.loads(url.read().decode())
-    print(data)&#13;```
-        </textarea>
+          <textarea class="code" id="markdown-input" placeholder="Type something here…" aria-labelledby="input-label" required autofocus># Hello world!&#13;View the [getting started](https://www.markdownguide.org/getting-started/) guide if you are unfamiliar with Markdown.</textarea>
       </c>
     </div>
     <c class="output" id="html-output"></c>
@@ -151,8 +100,6 @@
         if (window.webkitURL != null) {
           downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
         } else {
-          // Firefox requires the link to be added to the DOM
-          // before it can be clicked.
           downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
           downloadLink.onclick = destroyClickedElement;
           downloadLink.style.display = "none";
