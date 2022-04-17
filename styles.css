@@ -45,7 +45,7 @@
 
 ::-webkit-scrollbar {
   background: #fff;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -263,13 +263,13 @@ grid {
 }
 
 li {
-  margin-left: .2em;
+  margin-left: 0.2em;
   margin-bottom: var(--baseline);
 }
 
 li > p + ol,
 li > p + ul {
-  margin-top: calc(var(--baseline) * -1)
+  margin-top: calc(var(--baseline) * -1);
 }
 
 li.task-list-item {
@@ -415,7 +415,7 @@ table th[align="right"] {
 }
 
 p + table {
-  margin-top: calc(var(--line-height)*1.5 + var(--border-width)*-1);
+  margin-top: calc(var(--line-height) * 1.5 + var(--border-width) * -1);
 }
 
 [data-title] {
