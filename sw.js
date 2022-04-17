@@ -2,6 +2,7 @@ var CACHE = 'cache-v1';
 
 var urls = [
   '/',
+  'styles.css',
   'clipboard.min.js',
   'favicon.svg',
   'manifest.webmanifest',

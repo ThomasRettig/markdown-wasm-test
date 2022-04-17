@@ -1,0 +1,26 @@
+{
+  "name": "wasm-test",
+  "version": "1.0.0",
+  "description": "Markdown to HTML parser implemented in WASM.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "http-server -p 1313 -s"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThomasRettig/markdown-wasm-test.git"
+  },
+  "keywords": [
+    "wasm"
+  ],
+  "author": "Thomas Rettig",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ThomasRettig/markdown-wasm-test/issues"
+  },
+  "homepage": "https://github.com/ThomasRettig/markdown-wasm-test#readme",
+  "devDependencies": {
+    "http-server": "^14.1.0"
+  }
+}
