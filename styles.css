@@ -67,7 +67,8 @@
   color: white;
 }
 
-:focus-visible, :where(h1, h2, h3, h4, h5, h6) > a.anchor:focus-visible::before {
+:focus-visible,
+:where(h1, h2, h3, h4, h5, h6) > a.anchor:focus-visible::before {
   transition: 0s;
   outline: 2px solid var(--blue);
 }
