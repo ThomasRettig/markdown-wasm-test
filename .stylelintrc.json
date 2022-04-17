@@ -1,11 +1,3 @@
 {
-  "extends": "stylelint-config-standard",
-  "rules": {
-    "selector-type-no-unknown": [
-      true,
-      {
-        "custom-elements": ["default-namespace"]
-      }
-    ]
-  }
+  "extends": "stylelint-config-standard"
 }
