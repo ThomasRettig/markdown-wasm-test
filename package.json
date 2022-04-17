@@ -4,7 +4,7 @@
   "description": "Markdown to HTML parser implemented in WASM.",
   "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "html-linter --config ./html-linter.json && npx stylelint \"styles.css\"",
     "dev": "http-server -p 1313 -s"
   },
   "repository": {
@@ -21,6 +21,9 @@
   },
   "homepage": "https://github.com/ThomasRettig/markdown-wasm-test#readme",
   "devDependencies": {
-    "http-server": "^14.1.0"
+    "html-linter": "^1.1.1",
+    "http-server": "^14.1.0",
+    "stylelint": "^14.7.0",
+    "stylelint-config-standard": "^25.0.0"
   }
 }

@@ -1,60 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="utf-8">
-      <title>Markdown Editor</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="icon" href="favicon.svg">
-      <link rel="stylesheet" href="styles.css">
-      <script src="markdown.js"></script>
-      <link rel="stylesheet" href="highlight.css">
-      <script src="highlight.js"></script>
-      <script src="clipboard.min.js"></script>
-      <link rel="stylesheet" href="https://rsms.me/res/fonts/iaw.css" integrity="sha384-9zMvVmQxoDMBr2EbxSQiOyRITUL3Ewgea5OZ7BGh/c7XKFERrVkWWmiF60aytPjW" crossorigin="anonymous">
-      <link rel="stylesheet" href="https://rsms.me/inter/inter.css" integrity="sha384-W6+NiSXA/+3toA3eVYNOpnxGNKxc5xkp539DuEJohfNc727NX/cryh3nNBzh4J8B" crossorigin="anonymous">
-      <link rel="manifest" href="manifest.webmanifest">
-   </head>
-   <body>
-      <grid columns="2">
-        <c>
-          <h1 class="sr-only">Markdown Editor</h1>
+  <head>
+    <meta charset="utf-8">
+    <title>Markdown Editor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <script src="markdown.js"></script>
+    <link rel="stylesheet" href="highlight.css">
+    <script src="highlight.js"></script>
+    <script src="clipboard.min.js"></script>
+    <link rel="stylesheet" href="https://rsms.me/res/fonts/iaw.css" integrity="sha384-9zMvVmQxoDMBr2EbxSQiOyRITUL3Ewgea5OZ7BGh/c7XKFERrVkWWmiF60aytPjW" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" integrity="sha384-W6+NiSXA/+3toA3eVYNOpnxGNKxc5xkp539DuEJohfNc727NX/cryh3nNBzh4J8B" crossorigin="anonymous">
+    <link rel="manifest" href="manifest.webmanifest">
+  </head>
+  <body>
+    <grid columns="2">
+      <c>
+        <h1 class="sr-only">Markdown Editor</h1>
+      </c>
+      <c>
+      </c>
+      <div id="wrapper">
+        <c class="label">
+          <span id="input-label">Markdown</span>
+          <div class="gap select-none">
+            <button class="btn" id="save" data-title="Download Markdown file"><svg alt="Download file icon" role="img" xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="M16.59 9H15V4c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v5H7.41c-.89 0-1.34 1.08-.71 1.71l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.63-.63.19-1.71-.7-1.71zM5 19c0 .55.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1H6c-.55 0-1 .45-1 1z"/></svg></button>    
+            <button class="btn" id="clipboard" data-clipboard-target="#markdown-input" data-title="Copy text to clipboard"><svg alt="Copy to clipboard icon" role="img" xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="M15 20H5V7c0-.55-.45-1-1-1s-1 .45-1 1v13c0 1.1.9 2 2 2h10c.55 0 1-.45 1-1s-.45-1-1-1zm5-4V4c0-1.1-.9-2-2-2H9c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h9c1.1 0 2-.9 2-2zm-2 0H9V4h9v12z"/></svg></button>
+          </div>
         </c>
-        <c>
-        </c>
-        <div id="wrapper">
-          <c class="label">
-            <span id="input-label">Markdown</span>
-            <div class="gap select-none">
-              <button class="btn" id="save" data-title="Download Markdown file"><svg alt="Download file icon" role="img" xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="M16.59 9H15V4c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v5H7.41c-.89 0-1.34 1.08-.71 1.71l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.63-.63.19-1.71-.7-1.71zM5 19c0 .55.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1H6c-.55 0-1 .45-1 1z"/></svg></button>    
-              <button class="btn" id="clipboard" data-clipboard-target="#markdown-input" data-title="Copy text to clipboard"><svg alt="Copy to clipboard icon" role="img" xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="M15 20H5V7c0-.55-.45-1-1-1s-1 .45-1 1v13c0 1.1.9 2 2 2h10c.55 0 1-.45 1-1s-.45-1-1-1zm5-4V4c0-1.1-.9-2-2-2H9c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h9c1.1 0 2-.9 2-2zm-2 0H9V4h9v12z"/></svg></button>
-            </div>
-          </c>
-          <c class="label"></c>
-          <c class="input textarea">
-            <textarea class="code" id="markdown-input" placeholder="Type something here…" aria-labelledby="input-label" required autofocus># Hello world!
-View the [getting started](https://www.markdownguide.org/getting-started/) guide if you are unfamiliar with Markdown.
+        <c class="label"></c>
+        <c class="input textarea">
+          <textarea class="code" id="markdown-input" placeholder="Type something here…" aria-labelledby="input-label" required autofocus># Hello world!
+  View the [getting started](https://www.markdownguide.org/getting-started/) guide if you are unfamiliar with Markdown.
 
-## Syntax highlighting
+  ## Syntax highlighting
 
-Syntax highlighting for popular programming languages is supported. Here are a few examples.
+  Syntax highlighting for popular programming languages is supported. Here are a few examples.
 
-### Javascript
-```js
-var File = function(url, object){
-  File.list = Array.isArray(File.list)? File.list : [];
-  File.progress = File.progress || 0;
-  this.progress = 0;
-  this.object = object;
-  this.url = url;
-};
-```
-### C++
-```cpp
-#include &lt;iostream&gt;
-using namespace std;
+  ### Javascript
+  ```js
+  var File = function(url, object){
+    File.list = Array.isArray(File.list)? File.list : [];
+    File.progress = File.progress || 0;
+    this.progress = 0;
+    this.object = object;
+    this.url = url;
+  };
+  ```
+  ### C++
+  ```cpp
+  #include &lt;iostream&gt;
+  using namespace std;
 
-int main()
-{
+  int main()
+  {
     int num1, num2, add;
     cout&lt;&lt;&quot;Enter Two Numbers: &quot;;
     cin&gt;&gt;num1&gt;&gt;num2;
@@ -62,128 +62,127 @@ int main()
     cout&lt;&lt;&quot;\nResult = &quot;&lt;&lt;add;
     cout&lt;&lt;endl;
     return 0;
-}
-```
-### Go
+  }
+  ```
+  ### Go
 
-```go
-func loadPage(title string) (*Page, error) {
+  ```go
+  func loadPage(title string) (*Page, error) {
     filename := title + ".txt"
     body, err := os.ReadFile(filename)
     if err != nil {
         return nil, err
     }
     return &Page{Title: title, Body: body}, nil
-}
-```
+  }
+  ```
 
-### Python
+  ### Python
 
-```py
-import urllib.request, json 
-with urllib.request.urlopen("http://maps.googleapis.com/maps/api/geocode/json?address=google") as url:
+  ```py
+  import urllib.request, json 
+  with urllib.request.urlopen("http://maps.googleapis.com/maps/api/geocode/json?address=google") as url:
     data = json.loads(url.read().decode())
-    print(data)
-```
-</textarea>
-        </c>
-      </div>
-      <c class="output" id="html-output"></c>
-      </grid>
-      <script>
-        // instantiate Markdown parser
-        window["markdown"].ready.then((markdown) => {
-          const inputEl = document.getElementById("markdown-input");
-          const outputEl = document.getElementById("html-output");
-          let hljsTimer;
+    print(data)&#13;```
+        </textarea>
+      </c>
+    </div>
+    <c class="output" id="html-output"></c>
+    </grid>
+    <script>
+      // instantiate Markdown parser
+      window["markdown"].ready.then((markdown) => {
+        const inputEl = document.getElementById("markdown-input");
+        const outputEl = document.getElementById("html-output");
+        let hljsTimer;
 
-          function update() {
-            let source = inputEl.value;
-            let html = markdown.parse(source, {
-              parseFlags:
-                markdown.ParseFlags.DEFAULT |
-                markdown.ParseFlags.PERMISSIVE_WWW_AUTOLINKS,
-            });
-            outputEl.innerHTML = html;
-            updateCodeHighlight();
-          }
-
-          // syntax highlighting
-          function updateCodeHighlight() {
-            clearTimeout(hljsTimer);
-            if (typeof hljs == "undefined") {
-              hljsTimer = setTimeout(updateCodeSyntaxHighlighting, 500);
-              return;
-            }
-            document
-              .querySelectorAll('pre code[class^="language-"]')
-              .forEach((block) => {
-                hljs.highlightElement(block);
-              });
-          }
-
-          inputEl.addEventListener("input", update);
-          update();
-        });
-
-        // copy markdown to clipboard
-        var clipboard = new ClipboardJS("button");
-
-        clipboard.on("success", function (e) {
-          document.getElementById("clipboard").setAttribute("data-title", "Copied!");
-          setTimeout(function () {
-            document
-              .getElementById("clipboard")
-              .setAttribute("data-title", "Copy to clipboard");
-          }, 750);
-          e.clearSelection();
-        });
-
-        function saveTextAsFile() {
-          var textToWrite = document.getElementById("markdown-input").value;
-          var textFileAsBlob = new Blob([textToWrite], {
-            type: "text/plain",
+        function update() {
+          let source = inputEl.value;
+          let html = markdown.parse(source, {
+            parseFlags:
+              markdown.ParseFlags.DEFAULT |
+              markdown.ParseFlags.PERMISSIVE_WWW_AUTOLINKS,
           });
-          var fileNameToSaveAs = "markdown.txt";
+          outputEl.innerHTML = html;
+          updateCodeHighlight();
+        }
 
-          var downloadLink = document.createElement("a");
-          downloadLink.download = fileNameToSaveAs;
-          downloadLink.innerHTML = "Download File";
-          if (window.webkitURL != null) {
-            downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
-          } else {
-            // Firefox requires the link to be added to the DOM
-            // before it can be clicked.
-            downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
-            downloadLink.onclick = destroyClickedElement;
-            downloadLink.style.display = "none";
-            document.body.appendChild(downloadLink);
+        // syntax highlighting
+        function updateCodeHighlight() {
+          clearTimeout(hljsTimer);
+          if (typeof hljs == "undefined") {
+            hljsTimer = setTimeout(updateCodeSyntaxHighlighting, 500);
+            return;
           }
-
-          downloadLink.click();
+          document
+            .querySelectorAll('pre code[class^="language-"]')
+            .forEach((block) => {
+              hljs.highlightElement(block);
+            });
         }
 
-        document.getElementById("save").addEventListener("click", saveTextAsFile);
+        inputEl.addEventListener("input", update);
+        update();
+      });
 
-        // make textarea resize height automatically
-        const tx = document.getElementsByTagName("textarea");
-        for (let i = 0; i < tx.length; i++) {
-          tx[i].setAttribute(
-            "style",
-            "height:" + tx[i].scrollHeight + "px;overflow-y:hidden;"
-          );
-          tx[i].addEventListener("input", OnInput, false);
+      // copy markdown to clipboard
+      var clipboard = new ClipboardJS("button");
+
+      clipboard.on("success", function (e) {
+        document.getElementById("clipboard").setAttribute("data-title", "Copied!");
+        setTimeout(function () {
+          document
+            .getElementById("clipboard")
+            .setAttribute("data-title", "Copy to clipboard");
+        }, 750);
+        e.clearSelection();
+      });
+
+      function saveTextAsFile() {
+        var textToWrite = document.getElementById("markdown-input").value;
+        var textFileAsBlob = new Blob([textToWrite], {
+          type: "text/plain",
+        });
+        var fileNameToSaveAs = "markdown.txt";
+
+        var downloadLink = document.createElement("a");
+        downloadLink.download = fileNameToSaveAs;
+        downloadLink.innerHTML = "Download File";
+        if (window.webkitURL != null) {
+          downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+        } else {
+          // Firefox requires the link to be added to the DOM
+          // before it can be clicked.
+          downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+          downloadLink.onclick = destroyClickedElement;
+          downloadLink.style.display = "none";
+          document.body.appendChild(downloadLink);
         }
 
-        function OnInput() {
-          this.style.height = "auto";
-          this.style.height = this.scrollHeight + "px";
-        }
+        downloadLink.click();
+      }
 
-        // install service worker
-        if (navigator && navigator.serviceWorker) {
-          navigator.serviceWorker.register("sw.js");
-        }
-      </script>
-   </body>
+      document.getElementById("save").addEventListener("click", saveTextAsFile);
+
+      // make textarea resize height automatically
+      const tx = document.getElementsByTagName("textarea");
+      for (let i = 0; i < tx.length; i++) {
+        tx[i].setAttribute(
+          "style",
+          "height:" + tx[i].scrollHeight + "px;overflow-y:hidden;"
+        );
+        tx[i].addEventListener("input", OnInput, false);
+      }
+
+      function OnInput() {
+        this.style.height = "auto";
+        this.style.height = this.scrollHeight + "px";
+      }
+
+      // install service worker
+      if (navigator && navigator.serviceWorker) {
+        navigator.serviceWorker.register("sw.js");
+      }
+    </script>
+  </body>
 </html>
