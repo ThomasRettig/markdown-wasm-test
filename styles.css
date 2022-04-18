@@ -100,6 +100,28 @@ grid {
   --grid-ce: -1;
 }
 
+@media screen and (max-width: 950px) {
+  grid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+  }
+
+  c.textarea textarea {
+    min-height: fit-content;
+  }
+}
+
 grid > c {
   display: block;
   appearance: none;
@@ -202,7 +224,7 @@ hr {
 
 h1 {
   font-weight: 720;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.04em;
   font-size: var(--h1-size);
   line-height: calc(var(--line-height) * 2);
   margin-left: calc(var(--h1-size) / -22);
@@ -474,6 +496,7 @@ c.output {
 
 c.textarea textarea {
   font-family: var(--mono-font);
+  font-weight: 450;
   caret-color: var(--blue);
   flex: 1 1 auto;
   min-height: 55vh;
