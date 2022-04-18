@@ -78,14 +78,16 @@
       var clipboard = new ClipboardJS("button");
 
       clipboard.on("success", function (e) {
-        document.getElementById("clipboard").setAttribute("data-title", "Copied!");
-        setTimeout(function () {
+        document.getElementById("clipboard").setAttribute("data-title", "Copied! 🥳");
+        setTimeout(() => {
           document
             .getElementById("clipboard")
             .setAttribute("data-title", "Copy to clipboard");
         }, 750);
         e.clearSelection();
       });
+
+      // download markdown source code
 
       function saveTextAsFile() {
         var textToWrite = document.getElementById("markdown-input").value;
@@ -116,14 +118,14 @@
       for (let i = 0; i < tx.length; i++) {
         tx[i].setAttribute(
           "style",
-          "height:" + tx[i].scrollHeight + "px;overflow-y:hidden;"
+          `height: ${tx[i].scrollHeight}px; overflow-y: hidden;`
         );
         tx[i].addEventListener("input", OnInput, false);
       }
 
       function OnInput() {
         this.style.height = "auto";
-        this.style.height = this.scrollHeight + "px";
+        this.style.height =  `${this.scrollHeight}px`;
       }
 
       // install service worker
