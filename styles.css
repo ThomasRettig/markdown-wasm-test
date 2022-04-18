@@ -24,7 +24,7 @@
   --blue: #1871e9;
 }
 
-@supports (font-variation-settings:normal) {
+@supports (font-variation-settings: normal) {
   :root {
     --sans-font: "Inter var";
     --mono-font: "iaw-mono-var";
@@ -362,7 +362,10 @@ ol:not([start]) > li::before {
 table {
   --border-width: 1px;
   --border-opacity: 0.15;
-  --border-color: rgba(var(--foreground-color-rgb) calc(var(--foreground-color-a) * var(--border-opacity)));
+  --border-color: rgba(
+    var(--foreground-color-rgb)
+      calc(var(--foreground-color-a) * var(--border-opacity))
+  );
   overflow: auto;
   border-spacing: 0;
   border-collapse: collapse;
@@ -382,7 +385,13 @@ table td,
 table th {
   position: relative;
   padding: var(--baseline) 1em;
-  background-image: linear-gradient(90deg, var(--border-color), var(--border-color) 1px, transparent 0, transparent calc(var(--baseline) / 2));
+  background-image: linear-gradient(
+    90deg,
+    var(--border-color),
+    var(--border-color) 1px,
+    transparent 0,
+    transparent calc(var(--baseline) / 2)
+  );
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: 0 -1px;
