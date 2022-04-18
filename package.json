@@ -4,7 +4,8 @@
   "description": "Markdown to HTML parser implemented in WASM.",
   "main": "index.html",
   "scripts": {
-    "lint": "html-linter --config ./html-linter.json && npx stylelint \"styles.css\"",
+    "lint-html": "html-linter --config ./html-linter.json",
+    "lint-css": "npx stylelint \"styles.css\"",
     "dev": "http-server -p 1313 -s"
   },
   "repository": {
@@ -12,7 +13,8 @@
     "url": "git+https://github.com/ThomasRettig/markdown-wasm-test.git"
   },
   "keywords": [
-    "wasm"
+    "wasm",
+    "markdown"
   ],
   "author": "Thomas Rettig",
   "license": "MIT",
