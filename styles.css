@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Variables
+   Variables + Keyframes
    ========================================================================== */
 
 :root {
@@ -11,8 +11,8 @@
   --block-spacing-top: 0;
   --block-spacing-bottom: var(--line-height);
   --hr-thickness: 2px;
-  --h1-size: 2.8rem;
-  --h2-size: 2.2rem;
+  --h1-size: 2.7rem;
+  --h2-size: 2rem;
   --h3-size: 1.4rem;
   --h4-size: 1.1rem;
   --column-gap: calc(var(--line-height) * 2);
@@ -28,6 +28,15 @@
   :root {
     --sans-font: "Inter var";
     --mono-font: "iaw-mono-var";
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: #444;
   }
 }
 
@@ -98,28 +107,6 @@ grid {
   grid-template-columns: var(--grid-tc);
   --grid-cs: 1;
   --grid-ce: -1;
-}
-
-@media screen and (max-width: 950px) {
-  grid {
-    display: flex;
-    flex-direction: column;
-  }
-
-  header {
-    clip: rect(1px, 1px, 1px, 1px);
-    clip-path: inset(50%);
-    height: 1px;
-    width: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-  }
-
-  c.textarea textarea {
-    min-height: fit-content;
-  }
 }
 
 grid > c {
@@ -229,17 +216,17 @@ h1 {
   line-height: calc(var(--line-height) * 2);
   margin-left: calc(var(--h1-size) / -22);
   margin-top: calc(var(--line-height) * 2);
-  margin-bottom: var(--line-height);
+  margin-bottom: calc(var(--line-height) -10);
   word-break: break-word;
 }
 
 h2 {
-  font-weight: 700;
+  font-weight: 650;
   letter-spacing: -0.03em;
   font-size: var(--h2-size);
   line-height: calc(var(--line-height) * 2);
   margin-left: calc(var(--h2-size) / -26);
-  margin-bottom: var(--line-height);
+  margin-bottom: calc(var(--line-height) -10);
 }
 
 h3, h4 {
@@ -248,7 +235,7 @@ h3, h4 {
   font-size: var(--h3-size);
   padding-top: calc(var(--baseline) * 0.75);
   padding-bottom: calc(var(--baseline) * 0.25);
-  margin-bottom: var(--baseline);
+  margin-bottom: calc(var(--baseline) - 10);
 }
 
 h4 {
@@ -258,7 +245,7 @@ h4 {
 }
 
 a {
-  transition: 0.1s ease;
+  transition: 0.1s;
   text-decoration: underline;
   text-decoration-color: #aaa;
   white-space: nowrap;
@@ -460,7 +447,8 @@ p + table {
   display: inline-block;
   padding: 2px 6px;
   border-radius: 5px;
-  background: #444;
+  animation: fadeIn 0.3s; /* simple hack because pseudo element transitions are not supported */
+  background-color: #444; /* prevent the background from flashing */
   color: #fff;
   font-size: 12px;
   font-weight: 500;
@@ -564,12 +552,11 @@ blockquote {
   visibility: hidden;
   position: absolute;
   top: 0;
-  right: 2px;
+  right: 0;
   font-weight: normal;
   font-size: 25px;
   line-height: inherit;
-  content: "\1F517";
-  text-align: right;
+  content: "\1F517"; /* 🔗 emoji */
 }
 
 :where(h1, h2, h3, h4, h5, h6) > a.anchor:hover::before {
@@ -580,4 +567,39 @@ blockquote {
 :where(h1, h2, h3, h4, h5, h6) > a.anchor:focus::before,
 :where(h1, h2, h3, h4, h5, h6):hover .anchor::before {
   visibility: visible;
+}
+
+/* ==========================================================================
+   Media queries
+   ========================================================================== */
+
+@media screen and (max-width: 950px) {
+  grid {
+   display: flex;
+   flex-direction: column;
+  }
+
+  header {
+   clip: rect(1px, 1px, 1px, 1px);
+   clip-path: inset(50%);
+   height: 1px;
+   width: 1px;
+   margin: -1px;
+   overflow: hidden;
+   padding: 0;
+   position: absolute;
+  }
+
+  c.textarea textarea {
+   min-height: fit-content;
+  }
+
+  c.output {
+   max-width: 100%;
+  }
+
+  [data-title]:hover::before,
+  [data-title]:focus-visible::before {
+    right: calc(-20px - 0.25vw); /* ensure tooltip does not get chopped off */
+  }
 }
