@@ -91,13 +91,13 @@
       // download markdown source code
 
       function saveTextAsFile() {
-        var textToWrite = document.getElementById("markdown-input").value;
-        var textFileAsBlob = new Blob([textToWrite], {
+        const textToWrite = document.getElementById("markdown-input").value;
+        const fileNameToSaveAs = "markdown.md";
+        const downloadLink = document.createElement("a");
+        const textFileAsBlob = new Blob([textToWrite], {
           type: "text/plain",
         });
-        var fileNameToSaveAs = "markdown.md";
-
-        var downloadLink = document.createElement("a");
+        
         downloadLink.download = fileNameToSaveAs;
         downloadLink.innerHTML = "Download File";
         if (window.webkitURL != null) {
