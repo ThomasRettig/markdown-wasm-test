@@ -2,3 +2,17 @@
   for = "/*"
     [headers.values]
     Access-Control-Allow-Origin = "*"
+
+[[plugins]]
+  package = "netlify-plugin-inline-source"
+
+  [plugins.inputs]
+    attribute = "inline"
+
+    compress = true
+
+    pretty = false
+
+    ignore = []
+
+    svgAsImage = false
