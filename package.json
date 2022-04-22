@@ -6,7 +6,7 @@
   "scripts": {
     "lint-html": "html-linter --config ./html-linter.json",
     "lint-css": "npx stylelint \"styles.css\"",
-    "dev": "http-server -p 1313 -s"
+    "dev": "http-server -p 8888 -s"
   },
   "repository": {
     "type": "git",
