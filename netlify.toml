@@ -23,3 +23,4 @@
     [plugins.inputs.minifierOptions]
       removeComments = true
       minifyJS = true
+      collapseWhitespace = true
