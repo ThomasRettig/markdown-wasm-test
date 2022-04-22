@@ -483,7 +483,7 @@ c.output {
 
 c.textarea textarea {
   font-family: var(--mono-font);
-  font-weight: 450;
+  font-weight: 430;
   caret-color: var(--blue);
   flex: 1 1 auto;
   min-height: 55vh;
