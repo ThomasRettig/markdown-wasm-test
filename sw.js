@@ -16,7 +16,7 @@ var urls = [
   "https://rsms.me/inter/font-files/Inter-roman.var.woff2?v=3.19",
   "https://rsms.me/res/fonts/iaw/iaw-mono-vf.woff2",
   "icon-192x192.png", // default PWA icon fetched by Chrome desktop
-  "apple-touch-icon-512x512.png",
+  "apple-touch-icon-180x180.png",
 ];
 
 self.addEventListener("install", function (event) {
