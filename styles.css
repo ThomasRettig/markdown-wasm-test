@@ -575,8 +575,7 @@ blockquote {
 
 @media screen and (max-width: 950px) {
   grid {
-    display: flex;
-    flex-direction: column;
+    display: block;
   }
 
   header {
