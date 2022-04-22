@@ -594,6 +594,7 @@ blockquote {
   }
 
   c.output {
+    margin-top: max(3vh, 12px);
     max-width: 100%;
   }
 
