@@ -1,11 +1,40 @@
 /* ==========================================================================
+   Fonts
+   ========================================================================== */
+
+@font-face {
+  font-family: 'Inter var';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('font-files/Inter-roman.var.woff2') format('woff2');
+  font-named-instance: 'Regular';
+}
+
+@font-face {
+  font-family: 'iaw-mono-var';
+  font-weight: 100 700;
+  font-style: normal;
+  font-named-instance: 'Regular';
+  src: url("font-files/iaw-mono-vf.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: 'iaw-mono-var';
+  font-weight: 100 700;
+  font-style: italic;
+  font-named-instance: 'Italic';
+  src: url("font-files/iaw-mono-vf-Italic.woff2") format("woff2");
+}
+
+/* ==========================================================================
    Variables + Keyframes
    ========================================================================== */
 
 :root {
   --font-size: 15px;
-  --sans-font: "Inter";
-  --mono-font: "iaw-mono";
+  --sans-font: "Inter var";
+  --mono-font: "iaw-mono-var";
   --line-height: calc(var(--font-size) * 1.5);
   --baseline: calc(var(--line-height) / 2);
   --block-spacing-top: 0;
@@ -22,13 +51,6 @@
   --foreground-color: rgba(var(--foreground-color-rgb) var(--foreground-color-a));
   --background-color: #fff;
   --blue: #1871e9;
-}
-
-@supports (font-variation-settings: normal) {
-  :root {
-    --sans-font: "Inter var";
-    --mono-font: "iaw-mono-var";
-  }
 }
 
 @keyframes fadeIn {
@@ -590,7 +612,8 @@ blockquote {
   }
 
   c.textarea textarea {
-    min-height: fit-content;
+    min-height: 40vh;
+    padding: 0.7rem;
   }
 
   c.output {
