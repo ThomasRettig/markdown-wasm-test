@@ -6,7 +6,7 @@
     "scope": "/",
     "start_url": "/",
     "name": "Markdown Wasm",
-    "description": "Write Markdown in your browser.",
+    "description": "Write Markdown in your browser",
     "short_name": "Markdown",
     "icons": [
         {
