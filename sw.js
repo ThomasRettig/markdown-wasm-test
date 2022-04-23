@@ -11,10 +11,8 @@ var urls = [
   "highlight.js",
   "sw.js",
   "markdown.wasm",
-  "https://rsms.me/res/fonts/iaw.css",
-  "https://rsms.me/inter/inter.css",
-  "https://rsms.me/inter/font-files/Inter-roman.var.woff2?v=3.19",
-  "https://rsms.me/res/fonts/iaw/iaw-mono-vf.woff2",
+  "font-files/Inter-roman.var.woff2",
+  "font-files/iaw-mono-vf.woff2",
   "icon-192x192.png", // default PWA icon fetched by Chrome desktop
   "apple-touch-icon-180x180.png",
 ];
