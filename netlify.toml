@@ -4,14 +4,6 @@
     Access-Control-Allow-Origin = "*"
 
 [[plugins]]
-  package = "netlify-plugin-inline-critical-css"
-
-  [plugins.inputs]
-    fileFilter = ["*.html"]
-    directoryFilter = ["!node_modules"]
-    extract = false
-
-[[plugins]]
   package = "netlify-plugin-inline-source"
 
   [plugins.inputs]
