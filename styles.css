@@ -3,29 +3,29 @@
    ========================================================================== */
 
 @font-face {
-  font-family: 'Inter var';
+  font-family: "Inter var";
   font-style: normal;
   font-weight: 100 900;
   font-display: swap;
-  src: url('font-files/Inter-roman.var.woff2') format('woff2');
-  font-named-instance: 'Regular';
+  src: url("font-files/Inter-roman.var.woff2") format("woff2");
+  font-named-instance: "Regular";
 }
 
 @font-face {
-  font-family: 'iaw-mono-var';
+  font-family: "iAWriter Mono var";
   font-style: normal;
   font-weight: 100 700;
   font-display: swap;
-  font-named-instance: 'Regular';
+  font-named-instance: "Regular";
   src: url("font-files/iaw-mono-vf.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: 'iaw-mono-var';
+  font-family: "iAWriter Mono var";
   font-style: italic;
   font-weight: 100 700;
   font-display: swap;
-  font-named-instance: 'Italic';
+  font-named-instance: "Italic";
   src: url("font-files/iaw-mono-vf-Italic.woff2") format("woff2");
 }
 
@@ -36,7 +36,7 @@
 :root {
   --font-size: 15px;
   --sans-font: "Inter var";
-  --mono-font: "iaw-mono-var";
+  --mono-font: "iAWriter Mono var";
   --line-height: calc(var(--font-size) * 1.5);
   --baseline: calc(var(--line-height) / 2);
   --block-spacing-top: 0;
