@@ -53,6 +53,7 @@
   --foreground-color: rgba(var(--foreground-color-rgb) var(--foreground-color-a));
   --background-color: #fff;
   --blue: #1871e9;
+  --purple: #58006a;
 }
 
 @keyframes fadeIn {
@@ -120,9 +121,13 @@ q::before {
 }
 
 a,
-a:active,
-a:visited {
+a:active {
   color: inherit;
+}
+
+a:visited {
+  color: var(--purple);
+  text-decoration-color: #d5c0d9;
 }
 
 grid {
@@ -197,7 +202,7 @@ pre[class*="language-"] {
 
 code,
 pre {
-  font-family: var(--mono-font), "JetBrains Mono", Inconsolata, Menlo, monospace;
+  font-family: var(--mono-font), SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-weight: 450;
   word-wrap: break-word;
   white-space: pre-wrap;
@@ -506,7 +511,7 @@ c.output {
 }
 
 c.textarea textarea {
-  font-family: var(--mono-font);
+  font-family: var(--mono-font), SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-weight: 430;
   caret-color: var(--blue);
   flex: 1 1 auto;
