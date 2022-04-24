@@ -148,6 +148,7 @@ grid[columns="2"] {
 
 html {
   -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
   font-family: var(--sans-font), system-ui, sans-serif;
   font-size: var(--font-size);
   line-height: var(--line-height);
@@ -159,7 +160,6 @@ html {
 body {
   margin: 0;
   padding: 0;
-  scroll-behavior: smooth;
   overflow-x: hidden;
   padding: calc(var(--line-height) * 2);
   padding-bottom: calc(var(--line-height) * 3);
