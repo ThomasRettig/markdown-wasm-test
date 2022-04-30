@@ -633,38 +633,3 @@ blockquote {
     right: calc(-20px - 0.25vw); /* ensure tooltip does not get chopped off */
   }
 }
-
-/*@media screen and (prefers-color-scheme: dark) {
-  :not(a, h1) {
-    color: #ddd;
-    background-color: #222 !important;
-  }
-
-  h1 {
-    color: white;
-  }
-
-  a:hover {
-    color: white;
-    text-decoration-color: #eee;
-  }
-
-  svg {
-    fill: #ddd;
-  }
-
-  #input-label {
-    color: #bbb;
-  }
-
-  c.textarea textarea {
-    caret-color: white !important;
-    background-color: #262626 !important;
-    border-color: #666;
-  }
-
-  c.textarea textarea:focus {
-    border-color: #aaa;
-  }
-}
-*/
