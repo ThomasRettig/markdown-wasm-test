@@ -86,15 +86,7 @@
       });
 
       // copy markdown to clipboard
-      var clipboard = new ClipboardJS("button");
-
-      clipboard.on("success", (e) => {
-        document.getElementById("clipboard").setAttribute("data-title", "Copied! 🥳");
-        setTimeout(() => {
-          document.getElementById("clipboard").setAttribute("data-title", "Copy to clipboard");
-        }, 750);
-        e.clearSelection();
-      });
+      let clipboard = new ClipboardJS("button");
 
       // saving functionality
 
@@ -104,6 +96,7 @@
       textArea.addEventListener("input", () => {
         if (fileHandle) {
           statusIndicator.innerText = "Unsaved";
+          statusIndicator.classList.add("visible");
         }
       });
 
@@ -124,10 +117,14 @@
           fileHandle = await window.showSaveFilePicker(options);
         }
         statusIndicator.innerText = "Saving…";
+        statusIndicator.classList.add("visible");
         const writable = await fileHandle.createWritable();
         await writable.write(textToWrite);
         await writable.close();
         statusIndicator.innerText = "Saved";
+        setTimeout(() => {
+                  statusIndicator.classList.remove("visible");
+                }, 2000);
       }
 
       const saveButton = document.getElementById("saveBtn");

@@ -473,7 +473,7 @@ p + table {
   padding: 2px 6px;
   border-radius: 5px;
   animation: fadeIn 0.3s; /* simple hack because pseudo element transitions are not supported */
-  background-color: #444; /* prevent the background from flashing */
+  background-color: #333; /* prevent the background from flashing */
   color: #fff;
   font-size: 14px;
   font-weight: 500;
@@ -554,7 +554,7 @@ blockquote {
 
 .btn-label {
   color: black;
-  margin-right: 1px;
+  margin-right: 5px;
 }
 
 .btn-background {
@@ -637,5 +637,29 @@ blockquote {
   [data-title]:hover::before,
   [data-title]:focus-visible::before {
     right: calc(-20px - 0.25vw); /* ensure tooltip does not get chopped off */
+  }
+
+  .btn-background {
+    padding: 6px 12px;
+  }
+}
+
+@media screen and (min-width: 951px) {
+  #statusIndicator {
+    color: white;
+    background-color: #111;
+    border-radius: 8px;
+    font-weight: 500;
+    display: inline-block;
+    position: fixed;
+    bottom: 2.5vmin;
+    right: 3vmin;
+    padding: 4px 8px;
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+  }
+
+  #statusIndicator.visible {
+    opacity: 1;
   }
 }
