@@ -27,22 +27,33 @@
         <c class="label">
           <span id="input-label" class="select-none">Raw Markdown</span>
           <div class="gap select-none">
-            <button class="btn" id="save" data-title="Download Markdown file" aria-label="Download Markdown file"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="M16.59 9H15V4c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v5H7.41c-.89 0-1.34 1.08-.71 1.71l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.63-.63.19-1.71-.7-1.71zM5 19c0 .55.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1H6c-.55 0-1 .45-1 1z"/></svg></button>
-            <button class="btn" id="clipboard" data-clipboard-target="#markdown-input" data-title="Copy to clipboard" aria-label="Copy text to clipboard"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="M15 20H5V7c0-.55-.45-1-1-1s-1 .45-1 1v13c0 1.1.9 2 2 2h10c.55 0 1-.45 1-1s-.45-1-1-1zm5-4V4c0-1.1-.9-2-2-2H9c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h9c1.1 0 2-.9 2-2zm-2 0H9V4h9v12z"/></svg></button>
+            <div>
+              <button class="btn btn-background" id="clipboard" data-clipboard-target="#markdownInput" aria-label="Copy text to clipboard">
+                <c class="btn-label" aria-hidden="true">Copy</c>
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="M15 20H5V7c0-.55-.45-1-1-1s-1 .45-1 1v13c0 1.1.9 2 2 2h10c.55 0 1-.45 1-1s-.45-1-1-1zm5-4V4c0-1.1-.9-2-2-2H9c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h9c1.1 0 2-.9 2-2zm-2 0H9V4h9v12z"/></svg>
+              </button>
+            </div>
+            <div>
+              <button class="btn btn-background" id="saveBtn" data-title="Save to desktop" aria-label="Save Markdown file to desktop">
+                <!-- <c class="btn-label">Save</c> -->
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960" width="24" height="24"><path d="M840 376v480q0 33-23.5 56.5T760 936H200q-33 0-56.5-23.5T120 856V296q0-33 23.5-56.5T200 216h480l160 160ZM480 816q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35ZM240 496h360V336H240v160Z"/></svg>
+              </button>
+            </div>
           </div>
         </c>
         <c class="label"></c>
         <c class="input textarea">
-          <textarea class="code" id="markdown-input" placeholder="Type something here…" aria-labelledby="input-label" required autofocus># Hello world!&#13;View the [getting started](https://www.markdownguide.org/getting-started/) guide if you are unfamiliar with Markdown.</textarea>
+          <textarea class="code" id="markdownInput" placeholder="Type something here…" aria-labelledby="input-label" required autofocus># Hello world!&#13;View the [getting started](https://www.markdownguide.org/getting-started/) guide if you are unfamiliar with Markdown.</textarea>
       </c>
     </div>
-    <c class="output" id="html-output"></c>
+    <c class="output" id="htmlOutput"></c>
     </grid>
+    <div id="statusIndicator" aria-live="polite">Unsaved</div>
     <script>
       // instantiate Markdown parser
       window["markdown"].ready.then((markdown) => {
-        const inputEl = document.getElementById("markdown-input");
-        const outputEl = document.getElementById("html-output");
+        const inputEl = document.getElementById("markdownInput");
+        const outputEl = document.getElementById("htmlOutput");
         let hljsTimer;
 
         function update() {
@@ -85,31 +96,42 @@
         e.clearSelection();
       });
 
-      // download markdown source code
+      // saving functionality
 
-      function saveTextAsFile() {
-        const textToWrite = document.getElementById("markdown-input").value;
-        const fileNameToSaveAs = "markdown.md";
-        const downloadLink = document.createElement("a");
-        const textFileAsBlob = new Blob([textToWrite], {
-          type: "text/plain",
-        });
-        
-        downloadLink.download = fileNameToSaveAs;
-        downloadLink.innerHTML = "Download File";
-        if (window.webkitURL != null) {
-          downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
-        } else {
-          downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
-          downloadLink.onclick = destroyClickedElement;
-          downloadLink.style.display = "none";
-          document.body.appendChild(downloadLink);
+      let fileHandle = null;
+      const statusIndicator = document.getElementById("statusIndicator");
+      const textArea = document.getElementById("markdownInput");
+      textArea.addEventListener("input", () => {
+        if (fileHandle) {
+          statusIndicator.innerText = "Unsaved";
         }
+      });
 
-        downloadLink.click();
+      async function saveTextToFile() {
+        const textToWrite = textArea.value;
+        if (!fileHandle) {
+          const options = {
+            suggestedName: "untitled.md",
+            types: [
+              {
+                description: "Text Files",
+                accept: {
+                  "text/plain": [".md"],
+                },
+              },
+            ],
+          };
+          fileHandle = await window.showSaveFilePicker(options);
+        }
+        statusIndicator.innerText = "Saving…";
+        const writable = await fileHandle.createWritable();
+        await writable.write(textToWrite);
+        await writable.close();
+        statusIndicator.innerText = "Saved";
       }
 
-      document.getElementById("save").addEventListener("click", saveTextAsFile);
+      const saveButton = document.getElementById("saveBtn");
+      saveButton.addEventListener("click", saveTextToFile);
 
       // make textarea resize height automatically
       const tx = document.getElementsByTagName("textarea");

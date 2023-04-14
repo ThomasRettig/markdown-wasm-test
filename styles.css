@@ -158,7 +158,6 @@ html {
   line-height: var(--line-height);
   background: var(--background-color);
   color: var(--foreground-color);
-  letter-spacing: -0.01em;
 }
 
 body {
@@ -272,7 +271,6 @@ h4 {
 }
 
 a {
-  transition: 0.1s;
   text-decoration: underline;
   text-decoration-color: #aaa;
   white-space: nowrap;
@@ -477,7 +475,7 @@ p + table {
   animation: fadeIn 0.3s; /* simple hack because pseudo element transitions are not supported */
   background-color: #444; /* prevent the background from flashing */
   color: #fff;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   font-family: inherit;
   white-space: nowrap;
@@ -488,18 +486,14 @@ button {
 }
 
 svg {
-  vertical-align: bottom;
-  transition: 0.2s ease;
-}
-
-svg:hover {
-  transform: scale(1.1);
+  vertical-align: text-top;
+  zoom: 0.8;
 }
 
 c.label {
   font-weight: 500;
   letter-spacing: 0;
-  color: #999;
+  color: #5f5f5f;
   margin-bottom: 5px;
 }
 
@@ -558,11 +552,25 @@ blockquote {
   position: absolute;
 }
 
-@media screen and (min-width: 900px) {
-  .gap {
-    display: flex;
-    gap: calc(4px + 0.1vw);
-  }
+.btn-label {
+  color: black;
+  margin-right: 1px;
+}
+
+.btn-background {
+  background-color: #eee;
+  border-radius: 4px;
+  padding: 4px 8px;
+  transition: 0.1s;
+}
+
+.btn-background:hover {
+  background-color: #e4e4e4;
+}
+
+.gap {
+  display: flex;
+  gap: calc(5px + 0.2vw);
 }
 
 :where(h1, h2, h3, h4, h5, h6) > a.anchor {
