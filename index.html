@@ -43,7 +43,7 @@
         </c>
         <c class="label"></c>
         <c class="input textarea">
-          <textarea class="code" id="markdownInput" placeholder="Type something here…" aria-labelledby="input-label" required autofocus># Hello world!&#13;View the [“Getting Started”](https://www.markdownguide.org/getting-started/) guide if you are unfamiliar with Markdown.</textarea>
+          <textarea class="code" id="markdownInput" placeholder="Type something here…" aria-labelledby="input-label" required autofocus># Hello world!&#13;View the [“Getting Started”](https://www.markdownguide.org/getting-started/) guide if you are unfamiliar with Markdown. Want to open an existing Markdown file from your computer? Use the `Ctrl+O` shortcut.</textarea>
       </c>
     </div>
     <c class="output" id="htmlOutput"></c>
@@ -129,6 +129,27 @@
 
       const saveButton = document.getElementById("saveBtn");
       saveButton.addEventListener("click", saveTextToFile);
+
+      document.addEventListener("keydown", async (event) => {
+        if (event.ctrlKey && event.key === "o") {
+          event.preventDefault();
+          const options = {
+            types: [
+              {
+                description: "Text Files",
+                accept: {
+                  "text/plain": [".txt"],
+                  "text/plain": [".md"]
+                },
+              },
+            ],
+          };
+          const [handle] = await window.showOpenFilePicker(options);
+          const file = await handle.getFile();
+          const fileContents = await file.text();
+          textArea.value = fileContents;
+        }
+      });
 
       // make textarea resize height automatically
       const tx = document.getElementsByTagName("textarea");
