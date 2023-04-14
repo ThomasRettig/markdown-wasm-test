@@ -520,7 +520,7 @@ c.textarea textarea {
   font-size: 14px;
   width: 100%;
   height: auto;
-  resize: vertical;
+  resize: none;
   padding-right: 5px;
 }
 
