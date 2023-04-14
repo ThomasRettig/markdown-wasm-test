@@ -165,8 +165,7 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  padding: calc(var(--line-height) * 2);
-  padding-bottom: calc(var(--line-height) * 3);
+  padding: calc(var(--line-height)*1) calc(var(--line-height)*1.4) calc(var(--line-height) * 1.8);
 }
 
 @media only screen and (max-width: 600px) {
@@ -521,7 +520,7 @@ c.textarea textarea {
   font-size: 14px;
   width: 100%;
   height: auto;
-  resize: none;
+  resize: vertical;
   padding-right: 5px;
 }
 
