@@ -50,7 +50,7 @@
     </grid>
     <div id="statusIndicator" aria-live="polite">Unsaved</div>
     <script>
-      // instantiate Markdown parser
+      // Instantiate Markdown parser
       window["markdown"].ready.then((markdown) => {
         const inputEl = document.getElementById("markdownInput");
         const outputEl = document.getElementById("htmlOutput");
@@ -68,7 +68,7 @@
           updateCodeHighlight();
         }
 
-        // syntax highlighting
+        // Syntax highlighting
         function updateCodeHighlight() {
           clearTimeout(hljsTimer);
           if (typeof hljs == "undefined") {
@@ -86,11 +86,10 @@
         update();
       });
 
-      // copy markdown to clipboard
+      // Sopy markdown to clipboard
       let clipboard = new ClipboardJS("button");
 
-      // saving functionality
-
+      // Saving functionality
       let fileHandle = null;
       const statusIndicator = document.getElementById("statusIndicator");
       const textArea = document.getElementById("markdownInput");
@@ -176,6 +175,14 @@
         const [handle] = await window.showOpenFilePicker(options);
         return handle.getFile();
       }
+
+      // Prompt user before leaving page if changes are unsaved
+      window.addEventListener("beforeunload", (event) => {
+        if (fileHandle && statusIndicator.innerText === "Unsaved") {
+          event.preventDefault();
+          event.returnValue = "Changes you made may not be saved.";
+        }
+      });
 
       // Prevent interaction with `save` button on mobile devices
       function addInertAttribute() {
