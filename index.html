@@ -61,7 +61,8 @@
           let html = markdown.parse(source, {
             parseFlags:
               markdown.ParseFlags.DEFAULT |
-              markdown.ParseFlags.PERMISSIVE_WWW_AUTOLINKS,
+              markdown.ParseFlags.PERMISSIVE_WWW_AUTOLINKS |
+              markdown.ParseFlags.NO_HTML, // no HTML blocks, no HTML spans
           });
           outputEl.innerHTML = html;
           updateCodeHighlight();

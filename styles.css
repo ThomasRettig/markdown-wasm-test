@@ -250,7 +250,7 @@ h2 {
   font-weight: 650;
   letter-spacing: -0.03em;
   font-size: var(--h2-size);
-  line-height: calc(var(--line-height) * 2);
+  line-height: calc(var(--line-height) * 1.5);
   margin-left: calc(var(--h2-size) / -26);
   margin-bottom: calc(var(--line-height) -10);
 }
