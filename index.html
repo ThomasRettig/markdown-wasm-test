@@ -93,64 +93,90 @@
       let fileHandle = null;
       const statusIndicator = document.getElementById("statusIndicator");
       const textArea = document.getElementById("markdownInput");
+
+      // Update status indicator when changes are made
       textArea.addEventListener("input", () => {
         if (fileHandle) {
-          statusIndicator.innerText = "Unsaved";
-          statusIndicator.classList.add("visible");
+          setStatus("Unsaved");
         }
       });
 
+      // Save text to file
       async function saveTextToFile() {
         const textToWrite = textArea.value;
+
+        // If fileHandle is not set, ask user to choose a file to save to
         if (!fileHandle) {
-          const options = {
-            suggestedName: "untitled.md",
-            types: [
-              {
-                description: "Text Files",
-                accept: {
-                  "text/plain": [".md"],
-                },
-              },
-            ],
-          };
-          fileHandle = await window.showSaveFilePicker(options);
+          fileHandle = await getFileHandle();
         }
-        statusIndicator.innerText = "Saving…";
-        statusIndicator.classList.add("visible");
+
+        setStatus("Saving…");
         const writable = await fileHandle.createWritable();
         await writable.write(textToWrite);
         await writable.close();
-        statusIndicator.innerText = "Saved";
+        setStatus("Saved");
+
+        // Hide status indicator after 2 seconds
         setTimeout(() => {
-                  statusIndicator.classList.remove("visible");
-                }, 2000);
+          hideStatus();
+        }, 2000);
       }
 
+      // Get file handle from user
+      async function getFileHandle() {
+        const options = {
+          suggestedName: "untitled.md",
+          types: [
+            {
+              description: "Text Files",
+              accept: {
+                "text/plain": [".md"],
+              },
+            },
+          ],
+        };
+        return await window.showSaveFilePicker(options);
+      }
+
+      function setStatus(status) {
+        statusIndicator.innerText = status;
+        statusIndicator.classList.add("visible");
+      }
+
+      function hideStatus() {
+        statusIndicator.classList.remove("visible");
+      }
+
+      // Save button event listener
       const saveButton = document.getElementById("saveBtn");
       saveButton.addEventListener("click", saveTextToFile);
 
+      // Ctrl+O event listener
       document.addEventListener("keydown", async (event) => {
         if (event.ctrlKey && event.key === "o") {
           event.preventDefault();
-          const options = {
-            types: [
-              {
-                description: "Text Files",
-                accept: {
-                  "text/plain": [".txt"],
-                  "text/plain": [".md"]
-                },
-              },
-            ],
-          };
-          const [handle] = await window.showOpenFilePicker(options);
-          const file = await handle.getFile();
-          const fileContents = await file.text();
-          textArea.value = fileContents;
+          const file = await chooseFile();
+          textArea.value = await file.text();
         }
       });
 
+      // Get file from user
+      async function chooseFile() {
+        const options = {
+          types: [
+            {
+              description: "Text Files",
+              accept: {
+                "text/plain": [".txt", ".md"],
+              },
+            },
+          ],
+        };
+        const [handle] = await window.showOpenFilePicker(options);
+        return handle.getFile();
+      }
+
+      // Prevent interaction with `save` button on mobile devices
       function addInertAttribute() {
         if(/Mobi/.test(navigator.userAgent)) {
           let button = document.getElementById("save");
@@ -162,7 +188,7 @@
       window.addEventListener("load", addInertAttribute);
       window.addEventListener("resize", addInertAttribute);
 
-      // make textarea resize height automatically
+      // Resize textarea height automatically
       const tx = document.getElementsByTagName("textarea");
       for (let i = 0; i < tx.length; i++) {
         tx[i].setAttribute(
@@ -177,7 +203,7 @@
         this.style.height =  `${this.scrollHeight}px`;
       }
 
-      // install service worker
+      // Install service worker
       if (navigator && navigator.serviceWorker) {
         navigator.serviceWorker.register("sw.js");
       }
