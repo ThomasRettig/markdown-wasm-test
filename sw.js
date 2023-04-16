@@ -1,4 +1,4 @@
-var CACHE = "cache-v1";
+var CACHE = "cache-v2";
 
 var urls = [
   "/",
@@ -26,12 +26,29 @@ self.addEventListener("install", function (event) {
 });
 
 self.addEventListener("fetch", function (event) {
-  event.respondWith(
-    caches.match(event.request).then(function (response) {
-      if (response) {
-        return response;
-      }
-      return fetch(event.request);
+  if (event.request.url.startsWith(self.location.origin)) {
+    event.respondWith(
+      caches.match(event.request).then(function (response) {
+        if (response) {
+          return response;
+        }
+        return fetch(event.request);
+      })
+    );
+  }
+});
+
+self.addEventListener("activate", function (event) {
+  var cacheWhitelist = [CACHE];
+  event.waitUntil(
+    caches.keys().then(function (keyList) {
+      return Promise.all(
+        keyList.map(function (key) {
+          if (cacheWhitelist.indexOf(key) === -1) {
+            return caches.delete(key);
+          }
+        })
+      );
     })
   );
 });
