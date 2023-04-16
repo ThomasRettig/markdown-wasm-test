@@ -46,7 +46,7 @@
   --h2-size: 2rem;
   --h3-size: 1.4rem;
   --h4-size: 1.1rem;
-  --column-gap: calc(var(--line-height) * 2);
+  --column-gap: calc(var(--line-height) * 1.5);
   --row-gap: var(--line-height);
   --foreground-color-rgb: 0, 0, 0;
   --foreground-color-a: 1;
@@ -561,7 +561,7 @@ blockquote {
 .btn-background {
   background-color: #eee;
   border-radius: 4px;
-  padding: 4px 8px;
+  padding: 6px 10px;
   transition: 0.1s;
 }
 
