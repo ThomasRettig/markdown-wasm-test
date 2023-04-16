@@ -1,4 +1,4 @@
-var CACHE = "cache-v2";
+var CACHE = "cache-v3";
 
 var urls = [
   "/",
@@ -10,6 +10,7 @@ var urls = [
   "highlight.css",
   "highlight.js",
   "sw.js",
+  "markdown_sample.md",
   "markdown.wasm",
   "font-files/Inter-roman.var.woff2",
   "font-files/iaw-mono-vf.woff2",
