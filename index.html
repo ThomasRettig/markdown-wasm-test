@@ -5,14 +5,14 @@
     <title>Markdown Editor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> <!-- disable zoom in Safari when textarea is focused -->
     <link rel="stylesheet" href="styles.css" inline> <!-- inline CSS -->
-    <script src="markdown.js"></script>
-    <script src="highlight.js"></script>
     <link rel="stylesheet" href="highlight.css">
-    <script src="clipboard.min.js"></script>
     <link rel="manifest" href="manifest.webmanifest">
     <link rel="icon" href="favicon.svg">
-    <!-- refer to https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/app-icon/ for icon sizes-->
+    <!-- https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/app-icon/ for icon sizes-->
     <link rel="apple-touch-icon" href="apple-touch-icon-180x180.png" sizes="180x180">
+    <script src="markdown.js"></script>
+    <script src="clipboard.min.js"></script>
+    <script async src="highlight.js"></script>
   </head>
   <body>
     <grid columns="2">
@@ -98,6 +98,9 @@
       textArea.addEventListener("input", () => {
         if (fileHandle) {
           setStatus("Unsaved");
+          setTimeout(() => {
+            hideStatus();
+          }, 2000);
         }
       });
 
@@ -105,21 +108,24 @@
       async function saveTextToFile() {
         const textToWrite = textArea.value;
 
-        // If fileHandle is not set, ask user to choose a file to save to
-        if (!fileHandle) {
-          fileHandle = await getFileHandle();
-        }
+        try {
+            if (!fileHandle) {
+              fileHandle = await getFileHandle();
+            }
 
-        setStatus("Saving…");
-        const writable = await fileHandle.createWritable();
-        await writable.write(textToWrite);
-        await writable.close();
-        setStatus("Saved");
+            setStatus("Saving…");
+            const writable = await fileHandle.createWritable();
+            await writable.write(textToWrite);
+            await writable.close();
+            setStatus("Saved");
 
-        // Hide status indicator after 2 seconds
-        setTimeout(() => {
-          hideStatus();
-        }, 2000);
+            // Hide status indicator after 2 seconds
+            setTimeout(() => {
+              hideStatus();
+            }, 2000);
+          } catch (err) {
+            console.error(err);
+          }
       }
 
       // Get file handle from user
@@ -208,12 +214,29 @@
 
       function OnInput() {
         this.style.height = "auto";
-        this.style.height =  `${this.scrollHeight}px`;
+        this.style.height = `${this.scrollHeight}px`;
+
+        const debounce = () => {
+          requestAnimationFrame(() => {
+            this.style.height = "auto";
+            this.style.height = `${this.scrollHeight}px`;
+          });
+        };
+
+        debounce();
       }
 
       // Install service worker
-      if (navigator && navigator.serviceWorker) {
-        navigator.serviceWorker.register("sw.js");
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js')
+          .then(registration => {
+            console.log('Service worker registered successfully.');
+          })
+          .catch(error => {
+            console.error('Failed to register service worker:', error);
+          });
+      } else {
+        console.warn('Service workers are not supported in this browser.');
       }
     </script>
   </body>
