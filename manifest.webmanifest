@@ -1,7 +1,7 @@
 {
-    "theme_color": "#1871e9",
-    "background_color": "#1871e9",
-    "display": "standalone",
+    "theme_color": "#eee",
+    "background_color": "#eee",
+    "display_override": ["standalone", "minimal_ui"],
     "orientation": "any",
     "scope": "/",
     "start_url": "/",
