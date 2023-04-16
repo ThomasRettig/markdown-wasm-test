@@ -1,6 +1,6 @@
 # Markdown Formatting
 
-Are you tired of boring text? Do you want to spice up your writing with some attitude? Look no further than Markdown! This powerful markup language allows you to special formatting to your documents.
+Are you tired of boring text? Do you want to spice up your writing with some attitude? Look no further than Markdown! This powerful markup language allows you to format your documents easily.
 
 ## Headings
 
