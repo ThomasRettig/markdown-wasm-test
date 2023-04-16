@@ -34,8 +34,13 @@
               <!--copy to clipboard-->
               <div id="copy" role="presentation">
                 <button class="btn btn-background" id="clipboard" data-clipboard-target="#markdownInput" aria-label="Copy Markdown text to clipboard" role="menuitem">
-                  <c class="btn-label" aria-hidden="true">Copy text</c>
+                  <c class="btn-label" aria-hidden="true">Copy</c>
                   <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path d="M15 20H5V7c0-.55-.45-1-1-1s-1 .45-1 1v13c0 1.1.9 2 2 2h10c.55 0 1-.45 1-1s-.45-1-1-1zm5-4V4c0-1.1-.9-2-2-2H9c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h9c1.1 0 2-.9 2-2zm-2 0H9V4h9v12z"/></svg>
+                </button>
+              </div>
+              <div id="share" role="presentation">
+                <button class="btn btn-background" id="shareBtn" aria-label="Share Markdown text" role="menuitem">
+                  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960" height="24" width="24"><path d="M480 736q-17 0-28.5-11.5T440 696V289l-36 36q-11 11-27.5 11T348 324q-11-12-11-28.5t11-27.5l104-104q5-5 12.5-8t15.5-3q8 0 15.5 3t12.5 8l104 104q12 12 12 29t-12 28q-12 11-28.5 11T556 325l-36-36v407q0 17-11.5 28.5T480 736Zm-240 280q-33 0-56.5-23.5T160 936V496q0-33 23.5-56.5T240 416h80q17 0 28.5 11.5T360 456q0 17-11.5 28.5T320 496h-80v440h480V496h-80q-17 0-28.5-11.5T600 456q0-17 11.5-28.5T640 416h80q33 0 56.5 23.5T800 496v440q0 33-23.5 56.5T720 1016H240Z"/></svg>
                 </button>
               </div>
               <!--save to desktop-->
@@ -50,6 +55,7 @@
         </c>
         <c class="label"></c>
         <c class="input textarea" aria-label="Markdown input" role="region">
+          <!--textarea-->
           <textarea class="code" id="markdownInput" placeholder="Type something here…" aria-labelledby="inputLabel" required autofocus></textarea>
         </c>
       </div>
@@ -240,6 +246,29 @@
 
       window.addEventListener("load", addInertAttribute);
       window.addEventListener("resize", addInertAttribute);
+
+      // Sharing functionality
+      const shareBtn = document.getElementById("shareBtn");
+
+      async function shareText(text) {
+        try {
+          if (navigator.share) {
+            await navigator.share({
+              title: "Markdown text",
+              text: text,
+            });
+          } else {
+            console.log("Web Share API not supported");
+          }
+        } catch (error) {
+          console.log(`Error sharing text: ${error}`);
+        }
+      }
+
+      shareBtn.addEventListener("click", () => {
+        let text = inputEl.value;
+        shareText(text);
+      });
 
       // Resize textarea height automatically
       const tx = document.getElementsByTagName("textarea");

@@ -647,7 +647,11 @@ blockquote {
   }
 
   .btn-background {
-    padding: 6px 12px;
+    padding: 6px 10px;
+  }
+
+  #statusIndicator {
+    display: none;
   }
 }
 
