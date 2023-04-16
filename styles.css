@@ -240,9 +240,9 @@ h1 {
   letter-spacing: -0.04em;
   font-size: var(--h1-size);
   line-height: calc(var(--line-height) * 2);
-  margin-left: calc(var(--h1-size) / -22);
+  margin-left: calc(var(--h1-size) / - 22);
   margin-top: calc(var(--line-height) * 2);
-  margin-bottom: calc(var(--line-height) -10);
+  margin-bottom: calc(var(--line-height) - 10);
   word-break: break-word;
 }
 
@@ -251,8 +251,8 @@ h2 {
   letter-spacing: -0.03em;
   font-size: var(--h2-size);
   line-height: calc(var(--line-height) * 1.5);
-  margin-left: calc(var(--h2-size) / -26);
-  margin-bottom: calc(var(--line-height) -10);
+  margin-left: calc(var(--h2-size) / - 26);
+  margin-bottom: calc(var(--line-height) - 10);
 }
 
 h3, h4 {
@@ -395,10 +395,7 @@ ol:not([start]) > li::before {
 table {
   --border-width: 1px;
   --border-opacity: 0.15;
-  --border-color: rgba(
-    var(--foreground-color-rgb)
-      calc(var(--foreground-color-a) * var(--border-opacity))
-  );
+  --border-color: rgba(var(--foreground-color-rgb) calc(var(--foreground-color-a) * var(--border-opacity)));
   overflow: auto;
   border-spacing: 0;
   border-collapse: collapse;
