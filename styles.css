@@ -559,14 +559,14 @@ blockquote {
 }
 
 .btn-background {
-  background-color: #eee;
+  background-color: #f4f4f4;
   border-radius: 4px;
   padding: 6px 10px;
   transition: 0.1s;
 }
 
 .btn-background:hover {
-  background-color: #e4e4e4;
+  background-color: #eee;
 }
 
 .gap {
@@ -592,7 +592,7 @@ blockquote {
   font-weight: normal;
   font-size: 25px;
   line-height: inherit;
-  content: "\1F517"; /* 🔗 emoji */
+  content: "\1F517" "link"; /* 🔗 emoji */
 }
 
 :where(h1, h2, h3, h4, h5, h6) > a.anchor:hover::before {
