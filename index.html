@@ -199,7 +199,7 @@
       const saveButton = document.getElementById("saveBtn");
       saveButton.addEventListener("click", saveTextToFile);
 
-      // Ctrl+O event listener
+      // Ctrl+O to open file
       document.addEventListener("keydown", async (event) => {
         if (event.ctrlKey && event.key === "o") {
           event.preventDefault();
@@ -207,6 +207,14 @@
           textArea.value = await file.text();
           updateWordCount();
           update();
+        }
+      });
+
+      // Ctrl+S to save file
+      document.addEventListener("keydown", async (event) => {
+        if (event.ctrlKey && event.key === "s") {
+          event.preventDefault();
+          saveTextToFile();
         }
       });
 
