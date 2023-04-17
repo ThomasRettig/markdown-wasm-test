@@ -24,7 +24,7 @@
       <c></c>
       <div id="wrapper" role="main">
         <c class="label">
-          <span id="inputLabel" class="select-none">Raw Markdown</span>
+          <span id="inputLabel" class="select-none">Markdown</span>
           <div class="menu-container gap select-none">
             <!--word count-->
             <span id="wordCount" aria-label="Word count" aria-live="polite" role="status"></span>
@@ -215,6 +215,14 @@
         if (event.ctrlKey && event.key === "s") {
           event.preventDefault();
           saveTextToFile();
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.ctrlKey && event.shiftKey && event.code === "KeyC") {
+          event.preventDefault();
+          const wordCountEl = document.getElementById("wordCount");
+          wordCountEl.classList.toggle("hidden");
         }
       });
 
